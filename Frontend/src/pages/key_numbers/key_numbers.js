@@ -1,10 +1,16 @@
 import React from 'react';
 
-function Key_numbers() {
+import Header from '../../composant/header/header';
+import Footer from '../../composant/footer/footer';
+
+function KeyNumbers() {
   return (
     <div>
+      <Header/>
+        <p>Key numbers</p>
+      <Footer/>
     </div>
   );
 }
 
-export default Key_numbers;
+export default KeyNumbers;
