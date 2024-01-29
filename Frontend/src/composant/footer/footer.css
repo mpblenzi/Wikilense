@@ -1,0 +1,26 @@
+.class-footer{
+    height: 148px;
+    flex-shrink: 0;
+    background: #000;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: absolute;
+    bottom: 0;
+}
+
+.class-credit{
+    margin: 10px 100px 10px 100px;
+    color: #FFFBF9;
+    text-align: center;
+    font-family: Avenir LT Std;
+    font-size: 15.213px;
+    font-style: normal;
+}
+
+.class-confidential{
+    color: #FFFBF9;
+    text-align: center;
+    font-family: Avenir LT Std;
+    font-style: normal;
+}
