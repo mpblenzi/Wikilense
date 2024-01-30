@@ -15,6 +15,8 @@ function Acceuil() {
         scopes: ["User.Read"],
     });
 
+    const [datatest, setDatatest] = useState('');
+
     useEffect(() => {
         if(!!data){
             console.log(data);
@@ -35,13 +37,30 @@ function Acceuil() {
         }
     }, [data, error, result]);
 
+    useEffect(() => {
+        fetch('http://localhost:5000/data')
+          .then(response => response.json())
+          .then(datatest => setDatatest(datatest.message));
+      }, []);
+
+
+
     return (
         <div>
             <Header/>
-                <p>Welcome to Wikilense,{data?.displayName}</p>
+                <p>Hello {data?.displayName}, welcome to Wikilens</p>
+                <p>Discover general technical informations about lens and frame manufacturing</p>
+
+                <div>
+                    {datatest ? <p>{datatest}</p> : <p>Loading...</p>}
+                </div>
+
+                <button>Add and acticle </button>
             <Footer/>
         </div>
+
     );
 }
+
 
 export default Acceuil;

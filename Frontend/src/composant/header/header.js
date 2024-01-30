@@ -50,6 +50,7 @@ const Header = () => {
                 </div>          
             </nav>
             <SearchBar/>
+            <img src="" alt="logo" className="logo"/>
             <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/Wikipedia-logo-v2.svg/langfr-220px-Wikipedia-logo-v2.svg.png" alt="logo" className="logo"/>
         </div>
     );
