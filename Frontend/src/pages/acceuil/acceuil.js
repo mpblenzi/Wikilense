@@ -66,8 +66,7 @@ function Acceuil() {
 
                 console.log(Category);
         }       
-    }, []);
-
+    }, [Category]);
 
 
     return (

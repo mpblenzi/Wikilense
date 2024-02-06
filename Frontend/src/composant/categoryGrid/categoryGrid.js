@@ -6,7 +6,7 @@ const CategoryGrid = ({ categories }) => {
   return (
     <div className="grid">
       {categories.map((category) => (
-        <CategoryCard key={category[1]} title={category[1]} imageUrl={category.imageUrl} />
+        <CategoryCard category={category}/>
       ))}
     </div>
   );

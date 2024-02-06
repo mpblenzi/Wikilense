@@ -1,18 +1,26 @@
-import React from 'react';
-import './categoryCard.css'; // Assurez-vous de créer ce fichier CSS
-import { useEffect } from 'react';
+import React, { useState } from 'react';
+import CategoryModal from './categoryModal'; // Assurez-vous de créer ce composant
+import './categoryCard.css'; // Votre fichier de styles CSS
 
-const CategoryCard = ({ title, imageUrl }) => {
+const CategoryCard = ({ category }) => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
-  useEffect(() => {
-    console.log(imageUrl);
-  }, [imageUrl]);
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
 
   return (
-    <div className="card">
-      <img src={imageUrl} alt={title} className="card-image" />
-      <div className="card-title">{title}</div>
-    </div>
+    <>
+      <div className="card" onClick={openModal}>
+        <img src={category.imageUrl} alt={category[2]} className="card-image" />
+        <div className="card-title">{category[1]}</div>
+      </div>
+      {isModalOpen && <CategoryModal category={category} closeModal={closeModal} />}
+    </>
   );
 };
 
