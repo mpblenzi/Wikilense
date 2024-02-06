@@ -6,6 +6,7 @@ import pyodbc
 app = Flask(__name__)
 CORS(app)
 
+
 server = 'AZFRCER0300\DWK1' 
 database = 'Wikilense' 
 username = 'Wikilense' 
@@ -16,7 +17,7 @@ cursor = cnxn.cursor()
 
 @app.route('/data/category', methods=['GET'])
 def get_data():
-    cursor.execute("SELECT * FROM [Wikilense].[dbo].[Categorie]")
+    cursor.execute("SELECT * FROM [Wikilense].[dbo].[Categorie] WHERE ID_Categorie_Parent IS NULL")
     rows = cursor.fetchall()
     data = []
     for row in rows:
@@ -26,6 +27,16 @@ def get_data():
 @app.route('/images_category/<filename>')
 def serve_image_category(filename):
     return send_from_directory('asset/category/', filename)
+
+@app.route('/data/sous-category/<id>', methods=['GET'])
+def get_sous_category(id):
+    cursor.execute("SELECT * FROM [Wikilense].[dbo].[Categorie] WHERE ID_Categorie_Parent = ?", id)
+    rows = cursor.fetchall()
+    data = []
+    for row in rows:
+        data.append(list(row))
+    return jsonify(data)
+
 
 if __name__ == '__main__':
     app.run(debug=True)
