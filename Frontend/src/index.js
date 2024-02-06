@@ -6,6 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import { PublicClientApplication, EventType } from '@azure/msal-browser';
 import { BrowserRouter } from "react-router-dom";
 
+
 const pca = new PublicClientApplication({
   auth:{
       clientId: '8ba30e7a-d8c5-4fc5-811a-566652271f09',

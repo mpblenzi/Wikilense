@@ -1,42 +1,28 @@
 import React, { useState } from 'react';
+import './searchBar.css'; // Assurez-vous que le fichier CSS est importé
 
-// Fonction de débogage simple
-function debounce(func, wait) {
-  let timeout;
+function SearchBar() {
+  const [searchTerm, setSearchTerm] = useState('');
 
-  return function executedFunction(...args) {
-    const later = () => {
-      clearTimeout(timeout);
-      func(...args);
-    };
-
-    clearTimeout(timeout);
-    timeout = setTimeout(later, wait);
+  const handleSearchChange = (e) => {
+    setSearchTerm(e.target.value);
   };
-}
-
-const SearchBar = ({ onSearch }) => {
-  const [query, setQuery] = useState('');
-
-  // Gérer la mise à jour de la recherche
-  const handleSearch = debounce((q) => {
-    onSearch(q);
-  }, 500); // Attendre 500ms après le dernier événement clé pour lancer la recherche
 
   return (
-    <div role="search">
-      <input
-        type="text"
-        placeholder="Rechercher..."
-        value={query}
-        onChange={(e) => {
-          setQuery(e.target.value);
-          handleSearch(e.target.value);
-        }}
-        aria-label="Rechercher"
-      />
-    </div>
+    <>
+      <div className="group">
+        <svg viewBox="0 0 24 24" aria-hidden="true" className="icon">
+          <g>
+            <path
+              d="M21.53 20.47l-3.66-3.66C19.195 15.24 20 13.214 20 11c0-4.97-4.03-9-9-9s-9 4.03-9 9 4.03 9 9 9c2.215 0 4.24-.804 5.808-2.13l3.66 3.66c.147.146.34.22.53.22s.385-.073.53-.22c.295-.293.295-.767.002-1.06zM3.5 11c0-4.135 3.365-7.5 7.5-7.5s7.5 3.365 7.5 7.5-3.365 7.5-7.5 7.5-7.5-3.365-7.5-7.5z"
+            ></path>
+          </g>
+        </svg>
+        <input className="input" type="search" placeholder="Search" />
+      </div>
+
+      </>
   );
-};
+}
 
 export default SearchBar;
