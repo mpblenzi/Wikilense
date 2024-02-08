@@ -6,7 +6,7 @@ const CategoryModal = ({ category, closeModal }) => {
 
   useEffect(() => {
     // Assurez-vous que l'URL est correcte et que votre API est accessible
-    fetch(`http://localhost:5000/data/sous-category/${category[0]}`) // Remplacé category[0] par category.id
+    fetch(`http://localhost:5000/category/sous_categorie_de_categorie/${category.id}`) // Remplacé category[0] par category.id
       .then(response => response.json())
       .then(data => setSousCategories(data))
       .catch(error => console.error("Erreur de fetch:", error));
@@ -18,7 +18,7 @@ const CategoryModal = ({ category, closeModal }) => {
         <h2>{category[1]}</h2>
         <ul>
           {sousCategories.length > 0 && sousCategories.map((sousCategory) => (
-            <li key={sousCategory[0]}>{sousCategory[1]}</li>
+            <li key={sousCategory.id}>{sousCategory.nom}</li>
           ))} 
         </ul>
         <button>Subscribe to this category</button>

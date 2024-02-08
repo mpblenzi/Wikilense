@@ -38,31 +38,33 @@ function Acceuil() {
     }, [data, error, result]);
 
     useEffect(() => {
-        fetch('http://localhost:5000/data/category')
-          .then(response => response.json())
-          .then(Category => setCategory(Category));
-      }, []);
+        fetch('http://localhost:5000/category')
+        .then(response => response.json())
+        .then(Category => setCategory(Category));
+    }, []);
 
-      useEffect(() => {
+    useEffect(() => {
         if (Category) {
             // Créer un tableau de promesses pour charger toutes les images
             console.log(Category);
             const imagePromises = Category.map((category) => {
-                return fetch('http://localhost:5000/images_category/' + category[2]) // Assurez-vous que 'category.id' est la bonne clé pour l'ID de votre catégorie
+                return fetch('http://localhost:5000/image/images_category/' + category.path) // Assurez-vous que 'category.id' est la bonne clé pour l'ID de votre catégorie
                     .then(response => response.url);
             });
     
             Promise.all(imagePromises)
-                .then(images => {
-                    // Mettre à jour chaque catégorie avec son URL d'image dans un nouveau tableau
-                    const updatedCategories = Category.map((category, index) => ({
-                        ...category,
-                        imageUrl: images[index], // Assumer que 'images' est dans le même ordre que 'Category'
-                    }));
-    
-                    setCategory(updatedCategories); // Mettre à jour l'état avec les nouvelles données
-                })
-                .catch(error => console.log(error));
+            .then(images => {
+                const updatedCategories = Category.map((category, index) => ({
+                    ...category,
+                    imageUrl: images[index],
+                }));
+
+                // Vérifie si une mise à jour est nécessaire pour éviter la boucle infinie
+                if (JSON.stringify(Category) !== JSON.stringify(updatedCategories)) {
+                    setCategory(updatedCategories);
+                }
+            })
+            .catch(error => console.log(error));
 
                 console.log(Category);
         }       

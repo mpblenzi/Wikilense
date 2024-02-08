@@ -16,8 +16,8 @@ const CategoryCard = ({ category }) => {
   return (
     <>
       <div className="card" onClick={openModal}>
-        <img src={category.imageUrl} alt={category[2]} className="card-image" />
-        <div className="card-title">{category[1]}</div>
+        <img src={category.imageUrl} alt={category.path} className="card-image" />
+        <div className="card-title">{category.nom}</div>
       </div>
       {isModalOpen && <CategoryModal category={category} closeModal={closeModal} />}
     </>
