@@ -48,7 +48,7 @@ function Acceuil() {
             // Créer un tableau de promesses pour charger toutes les images
             console.log(Category);
             const imagePromises = Category.map((category) => {
-                return fetch('http://localhost:5000/image/images_category/' + category.path) // Assurez-vous que 'category.id' est la bonne clé pour l'ID de votre catégorie
+                return fetch('http://localhost:5000/image/images_category/' + category.Path) // Assurez-vous que 'category.id' est la bonne clé pour l'ID de votre catégorie
                     .then(response => response.url);
             });
     
