@@ -27,7 +27,7 @@ const pca = new PublicClientApplication({
 
 pca.addEventCallback((event) => {
   if (event.eventType === EventType.LOGIN_SUCCESS) {
-      pca.setActiveAccount(event.payload.account);
+    pca.setActiveAccount(event.payload.account);
   }
 });
 

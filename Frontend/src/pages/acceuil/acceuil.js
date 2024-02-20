@@ -7,6 +7,7 @@ import { fetchData } from '../../Fetch';
 
 import Header from '../../composant/header/header';
 import Footer from '../../composant/footer/footer';
+import CategoryGrid from '../../composant/categoryGrid/categoryGrid';
 
 function Acceuil() {
 
@@ -14,8 +15,7 @@ function Acceuil() {
     const {result, error} = useMsalAuthentication(InteractionType.Popup, {
         scopes: ["User.Read"],
     });
-
-    const [datatest, setDatatest] = useState('');
+    const [Category, setCategory] = useState([]);
 
     useEffect(() => {
         if(!!data){
@@ -38,11 +38,37 @@ function Acceuil() {
     }, [data, error, result]);
 
     useEffect(() => {
-        fetch('http://localhost:5000/data')
-          .then(response => response.json())
-          .then(datatest => setDatatest(datatest.message));
-      }, []);
+        fetch('http://localhost:5000/category')
+        .then(response => response.json())
+        .then(Category => setCategory(Category));
+    }, []);
 
+    useEffect(() => {
+        if (Category) {
+            // Créer un tableau de promesses pour charger toutes les images
+            console.log(Category);
+            const imagePromises = Category.map((category) => {
+                return fetch('http://localhost:5000/image/images_category/' + category.Path) // Assurez-vous que 'category.id' est la bonne clé pour l'ID de votre catégorie
+                    .then(response => response.url);
+            });
+    
+            Promise.all(imagePromises)
+            .then(images => {
+                const updatedCategories = Category.map((category, index) => ({
+                    ...category,
+                    imageUrl: images[index],
+                }));
+
+                // Vérifie si une mise à jour est nécessaire pour éviter la boucle infinie
+                if (JSON.stringify(Category) !== JSON.stringify(updatedCategories)) {
+                    setCategory(updatedCategories);
+                }
+            })
+            .catch(error => console.log(error));
+
+                console.log(Category);
+        }       
+    }, [Category]);
 
 
     return (
@@ -52,15 +78,13 @@ function Acceuil() {
                 <p>Discover general technical informations about lens and frame manufacturing</p>
 
                 <div>
-                    {datatest ? <p>{datatest}</p> : <p>Loading...</p>}
+                    <CategoryGrid categories={Category} />
                 </div>
 
                 <button>Add and acticle </button>
             <Footer/>
         </div>
-
     );
 }
-
 
 export default Acceuil;

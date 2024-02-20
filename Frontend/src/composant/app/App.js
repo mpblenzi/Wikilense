@@ -7,8 +7,8 @@ import { MsalProvider, useIsAuthenticated, useMsal } from '@azure/msal-react';
 import HowToUseWikilense from '../../pages/how_to_use_Wikilense/how_to_use_Wikilense';
 import KeyNumbers from '../../pages/key_numbers/key_numbers';
 import NewArticles from '../../pages/new_articles/new_articles';
-import Acceuil from '../../pages/acceuil/acceuil';
-
+import ArticleDetails from '../../pages/articleDetails/ArticleDetails';
+import Acceuil from '../../pages/Accueil/Accueil';
 function App({ msalInstance }) {
 
 
@@ -51,8 +51,9 @@ const Pages = () => {
       <Route path="/how_to_use_Wikilense" element={<HowToUseWikilense />} />
       <Route path="/key_numbers" element={<KeyNumbers />} />
       <Route path="/new_articles" element={<NewArticles />} />
-    </Routes>
-  )
+      <Route path="/articles/:articleId" element={<ArticleDetails />} />
+  </Routes>
+)
 }
 
 export default App;

@@ -1,0 +1,29 @@
+/* CategoryCard.css */
+.card {
+cursor: pointer;
+width: 100%;
+height: 100%;
+}
+
+/* CategoryModal.css */
+.modal-overlay {
+position: fixed;
+top: 0;
+left: 0;
+right: 0;
+bottom: 0;
+display: flex;
+background-color: rgba(0, 0, 0, 0.7); /* Effet transparent */
+z-index: 1000;/* Assurez-vous que c'est au-dessus de tout autre contenu */
+}
+
+.modal-content {
+background: rgba(0, 0, 0, 0.7);
+padding: 20px;
+border-radius: 8px;
+max-width: 100%;
+width: 100%;
+max-height: 100%;
+z-index: 1001; /* Plus haut que l'overlay pour ne pas être affecté par le fond transparent */
+color: white;
+}
