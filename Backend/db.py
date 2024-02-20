@@ -10,8 +10,15 @@ def query_db(query, args=(), one=False):
     cnxn = pyodbc.connect(dsn)
     cursor = cnxn.cursor()
     cursor.execute(query, args)
-    columns = [column[0] for column in cursor.description]
-    rv = [dict(zip(columns, row)) for row in cursor.fetchall()]
-    cursor.close()
-    cnxn.close()
-    return (rv[0] if rv else None) if one else rv
+    
+    if cursor.description is None:
+        cursor.commit()
+        cursor.close()
+        cnxn.close()
+        return None
+    else:
+        columns = [column[0] for column in cursor.description]
+        rv = [dict(zip(columns, row)) for row in cursor.fetchall()]
+        cursor.close()
+        cnxn.close()
+        return (rv[0] if rv else None) if one else rv
