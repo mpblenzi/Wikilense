@@ -1,4 +1,10 @@
-.class-footer{
+/* footer.css */
+body {
+    margin: 0;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.footer {
     height: 148px;
     flex-shrink: 0;
     background: #000;
@@ -9,18 +15,17 @@
     bottom: 0;
 }
 
-.class-credit{
-    margin: 10px 100px 10px 100px;
+.credit {
+    margin: 10px;
+    padding: 0 100px;
     color: #FFFBF9;
     text-align: center;
-    font-family: Avenir LT Std;
+    font-style: italic;
     font-size: 15.213px;
-    font-style: normal;
 }
 
-.class-confidential{
+.confidential {
     color: #FFFBF9;
     text-align: center;
-    font-family: Avenir LT Std;
     font-style: normal;
 }

@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './searchBar.css'; // Assurez-vous que le fichier CSS est importé
 
 function SearchBar() {
-  const [searchTerm, setSearchTerm] = useState('');
+  // const [searchTerm, setSearchTerm] = useState('');
 
-  const handleSearchChange = (e) => {
-    setSearchTerm(e.target.value);
-  };
+  // const handleSearchChange = (e) => {
+  //   setSearchTerm(e.target.value);
+  // };
 
   return (
     <>
