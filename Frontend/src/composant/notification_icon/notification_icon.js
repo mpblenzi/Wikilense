@@ -1,6 +1,6 @@
-import './notification_icon.css';
+import './Notification_icon.css';
 
-const Notification_icon = () => {
+const NotificationIcon = () => {
   return (
     <>
       <label className="container">
@@ -16,4 +16,4 @@ const Notification_icon = () => {
   );
 };
 
-export default Notification_icon;
+export default NotificationIcon;

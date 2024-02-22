@@ -7,7 +7,7 @@ import { useMsalAuthentication } from '@azure/msal-react';
 import { InteractionType } from '@azure/msal-browser';
 import { fetchData } from '../../Fetch';
 import SearchBar from '../searchBar/searchBar';
-import Notification_icon from '../notification_icon/notification_icon';
+import NotificationIcon from '../notification_icon/notification_icon';
 
 const Header = () => {
     const [data, setData] = useState(null);
@@ -51,7 +51,7 @@ const Header = () => {
                 </div>          
             </nav>
             <SearchBar/>
-            <Notification_icon/>
+            <NotificationIcon/>
             <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/Wikipedia-logo-v2.svg/langfr-220px-Wikipedia-logo-v2.svg.png" alt="logo" className="logo"/>
         </div>
     );
