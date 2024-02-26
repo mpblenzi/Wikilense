@@ -3,6 +3,9 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import './ArticleDetails.css';
 import CommentForm from '../../composant/CommentForm/CommentForm';
+import CommentsList from '../../composant/CommentsList/CommentsList';
+import Footer from '../../composant/footer/footer';
+import Header from '../../composant/header/header';
 
 const ArticleDetails = () => {
     const { articleId } = useParams(); // Utilisez useParams pour accéder au paramètre d'URL
@@ -25,6 +28,7 @@ const ArticleDetails = () => {
 
     return (
     <div>
+        <Header />
         <h1>{article.Titre}</h1>
         <p>{article.Date_Creation}</p>
         <p>{article.Mail}</p>
@@ -44,6 +48,10 @@ const ArticleDetails = () => {
         <p>{article.Nombre_Vues}</p>
 
         <CommentForm articleId={articleId} onCommentSubmitted={handleCommentSubmitted} />
+
+        <CommentsList articleId={articleId} />
+
+        <Footer />
     </div>
     );
 };

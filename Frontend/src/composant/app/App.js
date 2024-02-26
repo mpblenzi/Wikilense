@@ -9,6 +9,7 @@ import KeyNumbers from '../../pages/key_numbers/key_numbers';
 import NewArticles from '../../pages/new_articles/new_articles';
 import ArticleDetails from '../../pages/articleDetails/ArticleDetails';
 import Acceuil from '../../pages/acceuil/acceuil';
+import NewArticle from '../../pages/newarticle/New_Article';
 function App({ msalInstance }) {
 
 
@@ -52,6 +53,7 @@ const Pages = () => {
       <Route path="/key_numbers" element={<KeyNumbers />} />
       <Route path="/new_articles" element={<NewArticles />} />
       <Route path="/articles/:articleId" element={<ArticleDetails />} />
+      <Route path="/NewArticle" element={<NewArticle/>}/>
   </Routes>
 )
 }

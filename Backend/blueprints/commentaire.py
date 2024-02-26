@@ -28,3 +28,10 @@ def post_comment():
         return jsonify({"success": "Commentaire ajouté avec succès"}), 201
     except Exception as e:
         return jsonify({"error": str(e)}), 500
+    
+
+@commentaire_bp.route('/Get_comments/<int:id_article>', methods=['GET'])
+def get_comments(id_article):
+    # Récupérer les commentaires de l'article
+    comments = query_db("SELECT A.[ID], A.[ID_Article], A.[ID_Utilisateur], A.[Contenu], A.[Date_Publication], A.[Nombre_Likes], B.Nom FROM [Wikilense].[dbo].[Commentaire] A inner join  Utilisateur B on B.ID = A.ID_Utilisateur where A.ID_Article = ?", id_article)
+    return jsonify(comments)

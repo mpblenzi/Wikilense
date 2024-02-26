@@ -1,5 +1,6 @@
 import React from 'react';
 import './acceuil.css';
+import { useNavigate } from 'react-router-dom';
 import { useState,useEffect } from 'react';
 import { useMsalAuthentication } from '@azure/msal-react';
 import { InteractionType } from '@azure/msal-browser';
@@ -43,6 +44,8 @@ function Acceuil() {
         .then(Category => setCategory(Category));
     }, []);
 
+    
+
     useEffect(() => {
         if (Category) {
             // Créer un tableau de promesses pour charger toutes les images
@@ -70,6 +73,11 @@ function Acceuil() {
         }       
     }, [Category]);
 
+    let navigate = useNavigate();
+
+    const handleButtonClick = () => {
+        navigate('/NewArticle'); // Remplacez par le chemin de votre choix
+    };
 
     return (
         <div>
@@ -81,7 +89,7 @@ function Acceuil() {
                     <CategoryGrid categories={Category} />
                 </div>
 
-                <button>Add and acticle </button>
+                <button onClick={handleButtonClick}>Add and acticle </button>
             <Footer/>
         </div>
     );

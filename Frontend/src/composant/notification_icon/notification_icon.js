@@ -1,4 +1,4 @@
-import './Notification_icon.css';
+import './notification_icon.css';
 
 const NotificationIcon = () => {
   return (

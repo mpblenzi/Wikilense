@@ -1,5 +1,8 @@
 from flask import Blueprint, jsonify
 from db import query_db
+from flask import request
+from werkzeug.utils import secure_filename
+import os
 
 article_bp = Blueprint('article', __name__)
 
@@ -52,3 +55,17 @@ def get_article(article_id):
     article_data['Contenus'].sort(key=lambda x: x['position'])
 
     return jsonify(article_data)
+
+
+@article_bp.route('/upload', methods=['POST'])
+def file_upload():
+    #avoir le chemin du fichier actuel
+    path = os.getcwd()
+    file = request.files['file']  # 'file' est le nom de la clé correspondant au fichier
+    title = request.form.get('title')  # Récupérer d'autres données si nécessaire
+    if file:
+        filename = secure_filename(file.filename)
+        file.save(os.path.join(path+'\\asset\\documents\\', filename))  # Remplacez par le chemin où vous voulez enregistrer le fichier
+        return jsonify({"success": "File uploaded successfully", "filename": filename}), 200
+    else:
+        return jsonify({"error": "No file part"}), 400
