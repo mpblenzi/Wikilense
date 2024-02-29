@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Header from '../../composant/header/header';
 import Footer from '../../composant/footer/footer';
+import { useUser } from '../../context/usercontext';
 
 function NewArticle() {
     const [technologies, setTechnologies] = useState([]);
@@ -11,6 +12,7 @@ function NewArticle() {
     const [selectedSubcategory, setSelectedSubcategory] = useState('');
     const [title, setTitle] = useState('');
     const [file, setFile] = useState(null);
+    const { user, setUser } = useUser();
 
     useEffect(() => {
         // Fetch technologies
@@ -27,13 +29,14 @@ function NewArticle() {
                 .catch(error => console.error('Error fetching categories:', error));
         }
 
-        // À déclencher à nouveau lorsqu'une catégorie est sélectionnée pour charger les sous-catégories correspondantes
+        // // À déclencher à nouveau lorsqu'une catégorie est sélectionnée pour charger les sous-catégories correspondantes
         // if (selectedCategory) {
         //     fetch(`http://localhost:5000/category/souscategory/by_id?category=${selectedCategory}`)
         //         .then(response => response.json())
         //         .then(data => setSubcategories(data))
         //         .catch(error => console.error('Error fetching subcategories:', error));
         // }
+
     }, [selectedTechnology, selectedCategory]);
 
     const handleSubmit = (event) => {
@@ -57,7 +60,7 @@ function NewArticle() {
             })
             .then(response => response.json())
             .then(data => {
-                console.log(data); // Traiter la réponse du serveur
+                //console.log(data); // Traiter la réponse du serveur
             })
             .catch(error => {
                 console.error('Error uploading file:', error);
@@ -78,6 +81,10 @@ function NewArticle() {
             <Header />
             <div style={{ margin: '0 auto', padding: '20px' }}>
                 <h2>Create a New Article</h2>
+
+                <div>
+                    {user ? <p>Hello, {user}</p> : <p>No user logged in</p>}
+                </div>
                 <form>
                     <label>
                         Choose a technology:
@@ -86,7 +93,7 @@ function NewArticle() {
                             onChange={(e) => {
                                 setSelectedTechnology(e.target.value);
                                 setSelectedCategory(''); // Réinitialiser les catégories et sous-catégories
-                                setSelectedSubcategory('');
+                                setSelectedSubcategory(''); // Réinitialiser les sous-catégories
                             }}
                         >
                             <option value="">Choose technology</option>

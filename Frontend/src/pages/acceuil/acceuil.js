@@ -20,7 +20,6 @@ function Acceuil() {
 
     useEffect(() => {
         if(!!data){
-            console.log(data);
             return;
         }
 
@@ -49,7 +48,6 @@ function Acceuil() {
     useEffect(() => {
         if (Category) {
             // Créer un tableau de promesses pour charger toutes les images
-            console.log(Category);
             const imagePromises = Category.map((category) => {
                 return fetch('http://localhost:5000/image/images_category/' + category.Path) // Assurez-vous que 'category.id' est la bonne clé pour l'ID de votre catégorie
                     .then(response => response.url);
@@ -68,8 +66,6 @@ function Acceuil() {
                 }
             })
             .catch(error => console.log(error));
-
-                console.log(Category);
         }       
     }, [Category]);
 
@@ -82,14 +78,18 @@ function Acceuil() {
     return (
         <div>
             <Header/>
-                <p>Hello {data?.displayName}, welcome to Wikilens</p>
-                <p>Discover general technical informations about lens and frame manufacturing</p>
+                <div className='MessageDeBienvenueAccueil'>
+                    <h1>Hello {data?.displayName}, welcome to Wikilens</h1>
+                    <h2>Discover general technical informations about lens and frame manufacturing</h2>
+                </div>
+
 
                 <div>
                     <CategoryGrid categories={Category} />
                 </div>
-
-                <button onClick={handleButtonClick}>Add and acticle </button>
+                <div className='BoutonAddAnArticleContainer'>
+                    <button onClick={handleButtonClick} className='BoutonAddAnArticle'><i class="uil uil-plus-circle"></i>Add an acticle </button>
+                </div>
             <Footer/>
         </div>
     );

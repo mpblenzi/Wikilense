@@ -14,47 +14,52 @@ const Header = () => {
     const {result, error} = useMsalAuthentication(InteractionType.Popup, {
         scopes: ["user.Read"],
     });
+    const [user, setUser] = useState(null);
 
     useEffect(() => {
         if(!!data){
-            console.log("ici",data);
             return;
         }
 
         if(!!error){
-            console.log("ici",error);
             return;
         }
 
         if(result){
-            console.log("ici",result);
+            //console.log("ici",result);
+
+            //mettre dans user le result.account.username
+            setUser(result.account.username);
+
             const {accessToken} = result;
             fetchData("https://graph.microsoft.com/v1.0/me", accessToken)
                 .then(response => setData(response))
                 .catch(error => console.log(error));
-            
         }
     }, [data, error, result]);
 
     return (
-        <div className='class-header'>
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/Wikipedia-logo-v2.svg/langfr-220px-Wikipedia-logo-v2.svg.png" alt="logo" className="logo"/>
-            <nav>
-                <div>
-                    <Link to="/how_to_use_Wikilense">How to use WikiLens</Link>
-                </div>
-                <div>   
-                    <Link to="/key_numbers">Key numbers</Link>
-                </div>
-                <div>   
-                <Link to="/new_articles">New articles</Link>
-                </div>          
-            </nav>
-            <SearchBar/>
-            <NotificationIcon/>
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/Wikipedia-logo-v2.svg/langfr-220px-Wikipedia-logo-v2.svg.png" alt="logo" className="logo"/>
+        <div className="class-header">
+          {/* Logo sur la gauche */}
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/Wikipedia-logo-v2.svg/langfr-220px-Wikipedia-logo-v2.svg.png" alt="Logo gauche" className="logo" />
+    
+          {/* Liens et barre de recherche au centre */}
+          <div className="center-content">
+            {/* Liens */}
+            <div className="links">
+              <a href="#">FAQ</a>
+              <a href="#">Key figures</a>
+              <a href="#">New articles</a>
+            </div>
+            {/* Barre de recherche */}
+            <SearchBar/>            {/* Icône de notification */}
+            <i className="uil uil-bell"></i>
+          </div>
+    
+          {/* Logo sur la droite */}
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/Wikipedia-logo-v2.svg/langfr-220px-Wikipedia-logo-v2.svg.png" alt="Logo droite" className="logo" />
         </div>
-    );
-};
-
-export default Header;
+      );
+    }
+    
+    export default Header;

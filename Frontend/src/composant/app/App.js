@@ -10,9 +10,8 @@ import NewArticles from '../../pages/new_articles/new_articles';
 import ArticleDetails from '../../pages/articleDetails/ArticleDetails';
 import Acceuil from '../../pages/acceuil/acceuil';
 import NewArticle from '../../pages/newarticle/New_Article';
+
 function App({ msalInstance }) {
-
-
   return (
     <MsalProvider instance={msalInstance}>
       <div className="App">
@@ -39,7 +38,7 @@ const Pages = () => {
       }).catch(error => {
         //vider le local storage
         localStorage.clear();
-        console.log(error);
+        //console.log(error);
       });
     }
   });

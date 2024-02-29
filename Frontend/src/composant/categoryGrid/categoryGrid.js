@@ -5,8 +5,8 @@ import './categoryGrid.css'; // Assurez-vous de créer ce fichier CSS
 const CategoryGrid = ({ categories }) => {
   return (
     <div className="grid">
-      {categories.map((category) => (
-        <CategoryCard category={category}/>
+      {categories.map((category, index) => (
+        <CategoryCard key={index} category={category}/>
       ))}
     </div>
   );

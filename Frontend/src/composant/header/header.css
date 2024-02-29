@@ -1,10 +1,36 @@
-.class-header{
+.class-header {
     background-color: #000000;
     color: #ffffff;
-    position: flex;
     display: flex;
-    top: 0;
     justify-content: space-between;
     align-items: center;
-    box-sizing: border-box;
+    height: 132px; 
+    padding: 0 20px; 
+}
+
+.logo {
+    width: 300px;
+    height: 100px;
+    object-fit: contain; /* Empêche la déformation de l'image */
+}
+
+.center-content {
+    display: flex;
+    align-items: center;
+}
+
+.center-content i {
+    font-size: 47px;
+}
+
+.links a {
+    font-size: 24px;
+    margin-right: 100px; 
+    color: #ffffff; 
+    text-decoration: none;
+    transition: transform 0.3s ease-in-out; /* Animation sur le survol */
+}
+
+.links a:hover {
+    color: red;
 }

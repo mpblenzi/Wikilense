@@ -1,25 +1,34 @@
 .card {
-    width: 200px; /* ou la largeur que vous souhaitez */
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    overflow: hidden;
-    margin: 10px;
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-    transition: 0.3s;
-}
+    position: relative;
+    width: 400px;
+    height: 280px;
+    transition: 0.2s linear;
+  }
+  
+  .card-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Pour conserver les proportions de l'image */
+    border-radius: 10px;
+    /* Ajoutez d'autres styles de l'image selon vos besoins */
+  }
+  
+  .card-title-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    /* Ajoutez d'autres styles du conteneur de titre selon vos besoins */
+  }
+  
+  .card-title {
+    color: white;
+    font-size: 34px; /* Ajustez la taille de la police selon vos besoins */
+    text-align: center;
+    /* Ajoutez d'autres styles du titre selon vos besoins */
+  }
+  
 
-.card:hover {
-box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-}
-
-.card-image {
-width: 100%;
-height: 150px; /* ou la hauteur que vous souhaitez */
-object-fit: cover;
-}
-
-.card-title {
-padding: 15px;
-text-align: center;
-background-color: #f1f1f1;
-}
+  .card:hover {
+    transform: scale(1.1);
+  }

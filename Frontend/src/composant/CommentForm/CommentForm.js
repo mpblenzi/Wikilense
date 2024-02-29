@@ -22,7 +22,7 @@ const CommentForm = ({ articleId, onCommentSubmitted }) => {
         })
         .then(response => response.json())
         .then(data => {
-            console.log(data);
+            //console.log(data);
             setComment("");
             if (onCommentSubmitted) {
                 onCommentSubmitted();
