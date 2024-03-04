@@ -6,8 +6,8 @@ image_bp = Blueprint('image', __name__)
 
 @image_bp.route('/images_category/<filename>', methods=['GET'])
 def get_images(filename):
-    return send_from_directory('asset/category/', filename)
+    return send_from_directory('asset/category/', filename), 200
 
 @image_bp.route('/image_article/<filename>', methods=['GET'])
 def get_images_article(filename):
-    return send_from_directory('asset/Picture_doc/', filename)
+    return send_from_directory('asset/Picture_doc/', filename), 200

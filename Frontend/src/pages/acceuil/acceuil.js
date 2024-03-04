@@ -2,9 +2,7 @@ import React from 'react';
 import './acceuil.css';
 import { useNavigate } from 'react-router-dom';
 import { useState,useEffect } from 'react';
-import { useMsalAuthentication } from '@azure/msal-react';
-import { InteractionType } from '@azure/msal-browser';
-import { fetchData } from '../../Fetch';
+import { useUser } from '../../context/usercontext';
 
 import Header from '../../composant/header/header';
 import Footer from '../../composant/footer/footer';
@@ -12,38 +10,14 @@ import CategoryGrid from '../../composant/categoryGrid/categoryGrid';
 
 function Acceuil() {
 
-    const [data, setData] = useState(null);
-    const {result, error} = useMsalAuthentication(InteractionType.Popup, {
-        scopes: ["User.Read"],
-    });
     const [Category, setCategory] = useState([]);
-
-    useEffect(() => {
-        if(!!data){
-            return;
-        }
-
-        if(!!error){
-            console.log(error);
-            return;
-        }
-
-        if(result){
-            const {accessToken} = result;
-            fetchData("https://graph.microsoft.com/v1.0/me", accessToken)
-                .then(response => setData(response))
-                .catch(error => console.log(error));
-            
-        }
-    }, [data, error, result]);
+    const { userDetails} = useUser();
 
     useEffect(() => {
         fetch('http://localhost:5000/category')
         .then(response => response.json())
         .then(Category => setCategory(Category));
     }, []);
-
-    
 
     useEffect(() => {
         if (Category) {
@@ -78,8 +52,9 @@ function Acceuil() {
     return (
         <div>
             <Header/>
+
                 <div className='MessageDeBienvenueAccueil'>
-                    <h1>Hello {data?.displayName}, welcome to Wikilens</h1>
+                    <h1>Hello {userDetails.name}, welcome to Wikilens</h1>
                     <h2>Discover general technical informations about lens and frame manufacturing</h2>
                 </div>
 
@@ -90,6 +65,7 @@ function Acceuil() {
                 <div className='BoutonAddAnArticleContainer'>
                     <button onClick={handleButtonClick} className='BoutonAddAnArticle'><i class="uil uil-plus-circle"></i>Add an acticle </button>
                 </div>
+
             <Footer/>
         </div>
     );

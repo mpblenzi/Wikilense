@@ -65,7 +65,7 @@ const CategoryModal = ({ category, closeModal }) => {
         ))}
         <div className="modal-divider">
           <button className='SubscribeToThisCategory'>Subscribe to this category <i className="uil uil-bell"></i></button>
-          <button className='CloseButtonModalDivider' onClick={closeModalAndReset}>Close <i class="uil uil-times-circle"></i></button>
+          <button className='CloseButtonModalDivider' onClick={closeModalAndReset}>Close <i className="uil uil-times-circle"></i></button>
         </div>
       </div>
     </div>

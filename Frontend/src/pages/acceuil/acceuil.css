@@ -15,7 +15,7 @@
 .BoutonAddAnArticleContainer {
   display: flex;
   justify-content: center;
-  margin-top: 50px;
+  margin: 30px;
 }
 
 .BoutonAddAnArticleContainer button {
@@ -27,6 +27,7 @@
   font-size: 36px;
   cursor: pointer;
   transition: 0.2s linear;
+  
 }
 
 .BoutonAddAnArticleContainer button:hover {
