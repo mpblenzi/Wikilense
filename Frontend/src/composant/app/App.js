@@ -10,7 +10,6 @@ import NewArticles from '../../pages/new_articles/new_articles';
 import ArticleDetails from '../../pages/articleDetails/ArticleDetails';
 import Acceuil from '../../pages/acceuil/acceuil';
 import NewArticle from '../../pages/newarticle/New_Article';
-import { UserProvider } from '../../context/usercontext';
 
 function App({ msalInstance }) {
   return (
@@ -39,13 +38,11 @@ const Pages = () => {
       }).catch(error => {
         //vider le local storage
         localStorage.clear();
-        //console.log(error);
       });
     }
   });
 
   return(
-    <UserProvider>
       <Routes>
         <Route path="/Accueil" element={<Acceuil/>}/>
         <Route path="/" element={<Home/>}/>
@@ -56,7 +53,6 @@ const Pages = () => {
         <Route path="/articles/:articleId" element={<ArticleDetails />} />
         <Route path="/NewArticle" element={<NewArticle/>}/>
     </Routes>
-  </UserProvider>
 )
 }
 

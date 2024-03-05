@@ -1,4 +1,5 @@
 import pyodbc
+from colorama import Fore, Style
 
 server = 'AZFRCER0300\DWK1' 
 database = 'Wikilense' 
@@ -26,7 +27,12 @@ def query_db(query, args=(), one=False):
         cnxn.close()
         return (rv[0] if rv else None) if one else rv
 
-def log (message):
-    print("---------------------------------------")
-    print(message)
-    print("---------------------------------------")
+def log(message, level="info"):
+    if level == "info":
+        print(Fore.BLUE + message + Style.RESET_ALL)
+    elif level == "success":
+        print(Fore.GREEN + message + Style.RESET_ALL)
+    elif level == "error":
+        print(Fore.RED + message + Style.RESET_ALL)
+    else:
+        print(message)

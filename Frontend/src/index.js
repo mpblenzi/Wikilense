@@ -5,7 +5,6 @@ import App from './composant/app/App';
 import reportWebVitals from './reportWebVitals';
 import { PublicClientApplication, EventType } from '@azure/msal-browser';
 import { BrowserRouter } from "react-router-dom";
-import { UserProvider } from './context/usercontext';
 
 const pca = new PublicClientApplication({
   auth:{
@@ -34,11 +33,9 @@ pca.addEventCallback((event) => {
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <UserProvider>
       <BrowserRouter>
         <App msalInstance={pca} />
       </BrowserRouter>
-    </UserProvider>
   </React.StrictMode>
 );
 

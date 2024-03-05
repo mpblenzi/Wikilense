@@ -2,18 +2,22 @@ import React from 'react';
 import './acceuil.css';
 import { useNavigate } from 'react-router-dom';
 import { useState,useEffect } from 'react';
-import { useUser } from '../../context/usercontext';
 
 import Header from '../../composant/header/header';
 import Footer from '../../composant/footer/footer';
 import CategoryGrid from '../../composant/categoryGrid/categoryGrid';
+import { useMsal } from '@azure/msal-react';
 
 function Acceuil() {
 
     const [Category, setCategory] = useState([]);
-    const { userDetails} = useUser();
+
+    const { instance } = useMsal();
+    const account = instance.getActiveAccount();
+
 
     useEffect(() => {
+        console.log(account);
         fetch('http://localhost:5000/category')
         .then(response => response.json())
         .then(Category => setCategory(Category));
@@ -54,10 +58,9 @@ function Acceuil() {
             <Header/>
 
                 <div className='MessageDeBienvenueAccueil'>
-                    <h1>Hello {userDetails.name}, welcome to Wikilens</h1>
+                    <h1>Hello {account.name}, welcome to Wikilens</h1>
                     <h2>Discover general technical informations about lens and frame manufacturing</h2>
                 </div>
-
 
                 <div>
                     <CategoryGrid categories={Category} />
@@ -65,7 +68,7 @@ function Acceuil() {
                 <div className='BoutonAddAnArticleContainer'>
                     <button onClick={handleButtonClick} className='BoutonAddAnArticle'><i class="uil uil-plus-circle"></i>Add an acticle </button>
                 </div>
-
+    
             <Footer/>
         </div>
     );

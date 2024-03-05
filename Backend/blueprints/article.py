@@ -3,6 +3,7 @@ from db import *
 from flask import request
 from werkzeug.utils import secure_filename
 import os
+from colorama import Fore, Style
 
 article_bp = Blueprint('article', __name__)
 
