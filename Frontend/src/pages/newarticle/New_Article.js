@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Header from '../../composant/header/header';
 import Footer from '../../composant/footer/footer';
-import { useUser } from '../../context/usercontext';
+import { useMsal } from '@azure/msal-react';
 
 function NewArticle() {
     const [technologies, setTechnologies] = useState([]);
@@ -12,7 +12,9 @@ function NewArticle() {
     const [selectedSubcategory, setSelectedSubcategory] = useState('');
     const [title, setTitle] = useState('');
     const [file, setFile] = useState(null);
-    const { user, setUser } = useUser();
+    const { instance } = useMsal();
+    const account = instance.getActiveAccount();
+    const email = account.username;
 
     useEffect(() => {
         // Fetch technologies
@@ -49,8 +51,8 @@ function NewArticle() {
             formData.append('file', file); // 'file' est le nom de la clé attendue par votre API
             formData.append('title', title); // Envoyer d'autres données si nécessaire
             // Ajoutez d'autres champs si nécessaire
-            // formData.append('technology', selectedTechnology);
-            // formData.append('category', selectedCategory);
+            formData.append('technology', selectedTechnology);
+            formData.append('category', selectedCategory);
             // formData.append('subcategory', selectedSubcategory);
         
             // Envoyer le formulaire avec fetch
@@ -83,7 +85,8 @@ function NewArticle() {
                 <h2>Create a New Article</h2>
 
                 <div>
-                    {user ? <p>Hello, {user}</p> : <p>No user logged in</p>}
+                    <h3>Hello {account.username}, welcome to Wikilens</h3>
+                    <h4>Share your knowledge with the community</h4>
                 </div>
                 <form>
                     <label>

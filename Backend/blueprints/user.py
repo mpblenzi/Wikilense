@@ -14,7 +14,7 @@ def get_user_by_email(email):
         
         log("Récupération échoué de l'utilisateur avec l'email "+ email, "error")
         return jsonify({'message': 'Utilisateur non trouvé'}), 404
-        
+    
     else:
         print(email)
         print("-------------------")

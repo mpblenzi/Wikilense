@@ -71,10 +71,16 @@ def file_upload():
     file = request.files['file']  #'file' est le nom de la clé correspondant au fichier
     title = request.form.get('title')  # Récupérer d'autres données si nécessaire
     if file:
-        filename = secure_filename(file.filename)
-        file.save(os.path.join(path+'\\asset\\documents\\', filename)) # Remplacez par le chemin où vous voulez enregistrer le fichier
         
-        log("Le fichier "+ filename +" a été téléchargé avec succès dans asst/document" )
-        return jsonify({"success": "File uploaded successfully", "filename": filename}), 200
+        #si le fichier et un document word
+        if file.filename.endswith('.docx') or file.filename.endswith('.doc') :
+            filename = secure_filename(file.filename)
+            file.save(os.path.join(path+'\\asset\\documents\\', filename))
+            log("Le fichier "+ filename +" a été téléchargé avec succès dans asst/document" )
+            return jsonify({"success": "File uploaded successfully", "filename": filename}), 200
+        else :
+            log("Erreur lors du téléchargement du fichier", "error")
+            return jsonify({"error": "File type not allowed"}), 400
+        
     else:
         return jsonify({"error": "Document non trouvé"}), 400
