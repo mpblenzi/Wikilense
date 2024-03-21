@@ -2,6 +2,7 @@
 
 # dependencies
 Frontend/node_modules
+Frontend/public/article
 
 Backend/__pycache__
 Backend/blueprints/__pycache__

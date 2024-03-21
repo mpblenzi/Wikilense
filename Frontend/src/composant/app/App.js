@@ -36,8 +36,7 @@ const Pages = () => {
       }).then((response) => {
         instance.setActiveAccount(response.account)
       }).catch(error => {
-        //vider le local storage
-        localStorage.clear();
+        console.error(error);
       });
     }
   });

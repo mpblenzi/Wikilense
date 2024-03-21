@@ -1,4 +1,3 @@
-// Dans src/pages/articleDetails/ArticleDetails.js
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import './ArticleDetails.css';
@@ -9,43 +8,26 @@ import Header from '../../composant/header/header';
 
 const ArticleDetails = () => {
     const { articleId } = useParams(); // Utilisez useParams pour accéder au paramètre d'URL
-    const [article, setArticle] = useState(null);
+    const [articleContent, setArticleContent] = useState(''); // Utiliser une chaîne vide pour initialiser
 
     useEffect(() => {
-        fetch(`http://localhost:5000/article/article/${articleId}`)
-        .then(response => response.json())
-        .then(data => setArticle(data))
-        .catch(error => console.error("Erreur lors de l'incrémentation des vues:", error));
-    }, [articleId]);;
+        // Assurez-vous que l'URL est correcte et pointe vers votre API backend
+        fetch(`http://localhost:5000/article/${articleId}`)
+        .then(response => response.text()) // Traiter la réponse comme du texte
+        .then(data => setArticleContent(data))
+        .catch(error => console.error("Erreur lors de la récupération de l'article:", error));
+    }, []);
 
     const handleCommentSubmitted = () => {
         // Vous pourriez vouloir rafraîchir les commentaires ici
     };
-
-    if (!article) {
-    return <div>Chargement de l'article...</div>;
-    }
-
+    
+    // Pas besoin de vérifier si article est null ici car la valeur initiale est une chaîne vide
     return (
     <div>
         <Header />
-        <h1>{article.Titre}</h1>
-        <p>{article.Date_Creation}</p>
-        <p>{article.Mail}</p>
-
-        <div>
-            {article.Contenus.map((contenu, index) => {
-                return contenu.type === 'texte' ? (
-                    <p key={index}>{contenu.contenu}</p>
-                ) : (
-                    <img key={index} src={`http://localhost:5000/image/image_article/${contenu.src}`} alt={`Contenu ${index}`} style={{ maxWidth: "100%" }} />
-                );
-            })}
-        </div>
-        
-
-        <p>{article.Nombre_Likes}</p>
-        <p>{article.Nombre_Vues}</p>
+        {/* Utiliser dangerouslySetInnerHTML pour insérer du HTML */}
+        <div dangerouslySetInnerHTML={{ __html: articleContent }}></div>
 
         <CommentForm articleId={articleId} onCommentSubmitted={handleCommentSubmitted} />
 

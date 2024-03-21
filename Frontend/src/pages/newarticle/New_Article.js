@@ -46,6 +46,7 @@ function NewArticle() {
             formData.append('title', title);
             formData.append('technology', selectedTechnology);
             formData.append('category', selectedCategory);
+            formData.append('account_id', account?.idTokenClaims?.oid);
         
             // Envoyer le formulaire avec fetch
             fetch('http://localhost:5000/article/upload', {
@@ -58,7 +59,7 @@ function NewArticle() {
                 if (data.Status === 200) {
                     toast.success('Article uploaded successfully!');
 
-                    fetch('http://localhost:5000/article/create_article', {
+                    fetch('http://localhost:5000/article/create_article2', {
                         method: 'POST',
                         body: formData, // Pas besoin de spécifier le content-type header pour multipart/form-data
                     })
@@ -71,7 +72,6 @@ function NewArticle() {
                             toast.error('An error occurred while uploading the article. Please try again.2');
                         }
                     })
-
 
                     // Réinitialiser les champs
                     setSelectedTechnology('');
