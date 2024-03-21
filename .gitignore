@@ -5,4 +5,5 @@ Frontend/node_modules
 
 Backend/__pycache__
 Backend/blueprints/__pycache__
-Backend/assets/documents
+Backend/asset/documents
+Backend/asset/documentTraite

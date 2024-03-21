@@ -43,17 +43,16 @@ const Pages = () => {
   });
 
   return(
-      <Routes>
-        <Route path="/Accueil" element={<Acceuil/>}/>
-        <Route path="/" element={<Home/>}/>
-        <Route path="/about" element={<About/>}/>
-        <Route path="/how_to_use_Wikilense" element={<HowToUseWikilense />} />
-        <Route path="/key_numbers" element={<KeyNumbers />} />
-        <Route path="/new_articles" element={<NewArticles />} />
-        <Route path="/articles/:articleId" element={<ArticleDetails />} />
-        <Route path="/NewArticle" element={<NewArticle/>}/>
+    <Routes>
+      <Route path="/" element={<Home/>}/>
+      <Route path="/Accueil" element={<Acceuil/>}/>
+      <Route path="/about" element={<About/>}/>
+      <Route path="/how_to_use_Wikilense" element={<HowToUseWikilense />} />
+      <Route path="/key_numbers" element={<KeyNumbers />} />
+      <Route path="/new_articles" element={<NewArticles />} />
+      <Route path="/articles/:articleId" element={<ArticleDetails />} />
+      <Route path="/NewArticle" element={<NewArticle/>}/>
     </Routes>
-)
-}
+)};
 
 export default App;
