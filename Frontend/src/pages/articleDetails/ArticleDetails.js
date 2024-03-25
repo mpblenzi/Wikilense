@@ -20,12 +20,17 @@ const ArticleDetails = () => {
 
     const handleCommentSubmitted = () => {
         // Vous pourriez vouloir rafraîchir les commentaires ici
+        // Ou effectuer d'autres actions après la soumission du commentaire
+        
     };
     
     // Pas besoin de vérifier si article est null ici car la valeur initiale est une chaîne vide
     return (
     <div>
         <Header />
+
+
+
         {/* Utiliser dangerouslySetInnerHTML pour insérer du HTML */}
         <div dangerouslySetInnerHTML={{ __html: articleContent }}></div>
 

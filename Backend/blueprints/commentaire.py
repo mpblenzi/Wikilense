@@ -21,6 +21,7 @@ def post_comment():
         return jsonify({"error": "Données manquantes pour l'ajout du commentaire"}), 400
     
     # Insérer le commentaire dans la base de données
+    #avoir la date et heure actuelle en france 
     try:
         print(id_article, id_utilisateur, contenu, datetime.datetime.now())
         query_db('INSERT INTO Commentaire (ID_Article, ID_Utilisateur, Contenu, Date_Publication) VALUES (?, ?, ?, ?)',

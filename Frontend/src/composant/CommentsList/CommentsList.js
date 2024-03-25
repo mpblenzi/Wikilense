@@ -1,5 +1,6 @@
 import {useState, useEffect } from "react";
 import React from 'react';
+import './CommentsList.css';
 
 const CommentsList = ({articleId}) => {
 

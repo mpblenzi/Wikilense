@@ -1,0 +1,32 @@
+.comment-form {
+    max-width: 500px; /* ajuste la largeur selon tes besoins */
+    margin: 5px;
+    padding: 20px;
+    background: #f9f9f9;
+    border: 1px solid #e1e1e1;
+    border-radius: 5px;
+}
+
+.comment-form input[type="text"] {
+    width: calc(100% - 110px);
+    padding: 10px;
+    margin-right: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px; /* Taille de la police ajustable */
+}
+
+.comment-form button[type="submit"] {
+    width: 100px;
+    padding: 10px;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px; /* Taille de la police ajustable */
+}
+
+.comment-form button[type="submit"]:hover {
+    background-color: #0056b3;
+}

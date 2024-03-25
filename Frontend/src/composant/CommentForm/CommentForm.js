@@ -1,9 +1,14 @@
 import React, { useState } from 'react';
+import { useMsal } from '@azure/msal-react';
+import './CommentForm.css';
+
 
 const CommentForm = ({ articleId, onCommentSubmitted }) => {
     const [comment, setComment] = useState("");
     // Exemple d'ID utilisateur, devrait être obtenu via authentification/session
-    const id_utilisateur = 3; // Ajustez selon votre logique d'authentification
+    const { instance } = useMsal();
+    const account = instance.getActiveAccount();
+    const id_utilisateur =  account?.idTokenClaims?.oid; // Ajustez selon votre logique d'authentification
 
     const handleCommentSubmit = (e) => {
         e.preventDefault(); // Empêche le rechargement de la page
@@ -22,7 +27,7 @@ const CommentForm = ({ articleId, onCommentSubmitted }) => {
         })
         .then(response => response.json())
         .then(data => {
-            //console.log(data);
+            console.log(data);
             setComment("");
             if (onCommentSubmitted) {
                 onCommentSubmitted();
@@ -32,14 +37,14 @@ const CommentForm = ({ articleId, onCommentSubmitted }) => {
     };
 
     return (
-        <form onSubmit={handleCommentSubmit}>
+        <form onSubmit={handleCommentSubmit} className='comment-form'>
             <input
                 type="text"
                 value={comment}
                 onChange={(e) => setComment(e.target.value)}
-                placeholder="Ajouter un commentaire..."
+                placeholder="add a comment..."
             />
-            <button type="submit">Envoyer</button>
+            <button type="submit">Post Comment</button>
         </form>
     );
 };
