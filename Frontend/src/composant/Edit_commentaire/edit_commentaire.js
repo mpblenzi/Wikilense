@@ -4,9 +4,7 @@ import './edit_commentaire.css';
 
 const EditCommentButton = ({ comment, onEdit}) => {
     const handleEdit = () => {
-      
       onEdit(comment);
-
     };
 
     return (

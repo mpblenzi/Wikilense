@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import DeleteCommentButton from "../Delete_commentaire/Delete_commentaire"; // Importer le composant de suppression de commentaire pour l'utiliser dans la liste de commentaires  
 import './CommentsList.css';
 import { useMsal } from '@azure/msal-react';
-import { Bounce, ToastContainer, toast } from 'react-toastify';
+import {ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import EditCommentButton from "../Edit_commentaire/edit_commentaire";
 
@@ -15,20 +15,27 @@ const CommentsList = ({ articleId }) => {
     const [editContent, setEditContent] = useState('');
     const [deletingComments, setDeletingComments] = useState([]);
 
-    useEffect(() => {
+
+    function actualiser_com() {
         fetch(`http://localhost:5000/commentaire/Get_comments/${articleId}`)
             .then(response => response.json())
             .then(data => setComments(data))
             .catch(error => console.error("Erreur lors de la récupération des commentaires:", error));
-    }, [articleId], [currentUser], [deletingComments], );
+    }
+
+    useEffect(() => {
+        actualiser_com();
+    }, [articleId], [currentUser], [deletingComments], [editCommentId]);
+
 
     const handleEdit = (comment) => {
         setEditCommentId(comment.ID);
         setEditContent(comment.Contenu);
+        
     };
 
     const saveEdit = (commentId) => {
-        fetch(`http://localhost:5000/commentaire/${commentId}`, {
+        fetch(`http://localhost:5000/commentaire/edit/${commentId}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -47,6 +54,7 @@ const CommentsList = ({ articleId }) => {
                     if (comment.ID === commentId) {
                         return { ...comment, Contenu: editContent };
                     }
+                    actualiser_com();
                     return comment;
                 }));
                 setEditCommentId(null); // Reset l'ID de l'édition après sauvegarde
@@ -71,6 +79,7 @@ const CommentsList = ({ articleId }) => {
 
     return (
         <div className="comments-section">
+            
             <ToastContainer
                 position="top-right"
                 autoClose={5000}
@@ -85,8 +94,13 @@ const CommentsList = ({ articleId }) => {
 
             {comments.map((comment, index) => (
                 <div key={index} className={`comment ${deletingComments.includes(comment.ID) ? 'comment-deleting' : ''}`}>
+
                     <div className="comment-user">{comment.Nom}</div>
                     <span>Posté le {new Date(comment.Date_Publication).toLocaleString()}</span>
+
+                    {/* si Modifier = true alors marquer modifier sinon rien */}
+                    {comment.Modifier === true ?<span> Modifier</span> : null}
+
                     {editCommentId === comment.ID ? (
                         <textarea
                             value={editContent}

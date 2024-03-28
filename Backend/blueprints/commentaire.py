@@ -33,7 +33,7 @@ def post_comment():
 @commentaire_bp.route('/Get_comments/<int:id_article>', methods=['GET'])
 def get_comments(id_article):
     # Récupérer les commentaires de l'article
-    comments = query_db("SELECT A.[ID], A.[ID_Article], A.[ID_Utilisateur], A.[Contenu], A.[Date_Publication], A.[Nombre_Likes], B.Nom, A.Active FROM [Wikilense].[dbo].[Commentaire] A inner join  Utilisateur B on B.ID = A.ID_Utilisateur where A.ID_Article = ? and A.Active = 1", id_article)
+    comments = query_db("SELECT A.[ID], A.[ID_Article], A.[ID_Utilisateur], A.[Contenu], A.[Date_Publication], A.[Nombre_Likes], B.Nom, A.Active, A.Modifier FROM [Wikilense].[dbo].[Commentaire] A inner join  Utilisateur B on B.ID = A.ID_Utilisateur where A.ID_Article = ? and A.Active = 1", id_article)
     return jsonify(comments)
 
 @commentaire_bp.route('/Delete_comment/<int:id_comment>', methods=['DELETE'])
@@ -41,3 +41,26 @@ def delete_comment(id_comment):
     # Supprimer le commentaire
     query_db('UPDATE Commentaire SET Active = 0 WHERE ID = ?', id_comment)
     return jsonify({"success": "Commentaire supprimé avec succès"}), 200
+
+@commentaire_bp.route('/edit/<int:id_comment>', methods=['PUT'])
+def edit_comment(id_comment):
+    # Assurez-vous que la requête contient du JSON
+    if not request.is_json:
+        return jsonify({"error": "La requête doit être en JSON"}), 400
+
+    data = request.get_json()
+
+    # Valider les données reçues
+    print(data)
+    contenu = data.get('content')
+    
+    if not contenu:
+        return jsonify({"error": "Données manquantes pour la modification du commentaire"}), 401
+    
+    # Insérer le commentaire dans la base de données mettre le champ modifier à 1 et le champ Modifier a 1
+    try:
+        query_db('UPDATE Commentaire SET Contenu = ?, Modifier = 1 WHERE ID = ?', (contenu, id_comment))
+        return jsonify({"success": "Commentaire modifié avec succès"}), 200
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+    
