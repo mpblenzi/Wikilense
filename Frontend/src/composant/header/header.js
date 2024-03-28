@@ -32,8 +32,13 @@ const Header = () => {
           <NotificationIcon/>
         </div>
 
-        {/* Logo sur la droite */}
-        <img src="/assets/LOFT TKS white logo HD (1).png" alt="Logo droite" className="logo" />
+        <div className="right-content">
+          {/* Logo sur la droite */}
+          <img src="/assets/LOFT TKS white logo HD (1).png" alt="Logo droite" className="logo" />
+          {/*Rajouter le logo essilor luxo */}
+          <img src="/assets/EssilorLuxottica white logo.png" alt="Logo droite" className="logo" />
+        </div>
+        
 
       </div>
     );

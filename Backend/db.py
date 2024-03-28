@@ -36,3 +36,7 @@ def log(message, level="info"):
         print(Fore.RED + message + Style.RESET_ALL)
     else:
         print(message)
+    
+    #ecrire dasn un fichier log
+    # with open("log.txt", "a") as f:
+    #     f.write(f"{level.upper()}: {message}\n")

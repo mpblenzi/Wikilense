@@ -29,9 +29,9 @@ const CommentForm = ({ articleId, onCommentSubmitted }) => {
         .then(data => {
             console.log(data);
             setComment("");
-            if (onCommentSubmitted) {
-                onCommentSubmitted();
-            }
+        
+            onCommentSubmitted();
+            
         })
         .catch(error => console.error("Erreur lors de l'ajout du commentaire:", error));
     };

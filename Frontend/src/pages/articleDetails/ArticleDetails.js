@@ -19,8 +19,11 @@ const ArticleDetails = () => {
     }, []);
 
     const handleCommentSubmitted = () => {
-        // Vous pourriez vouloir rafraîchir les commentaires ici
-        // Ou effectuer d'autres actions après la soumission du commentaire
+        // Recharger le contenu de l'article après la soumission d'un commentaire
+        fetch(`http://localhost:5000/article/${articleId}`)
+        .then(response => response.text())
+        .then(data => setArticleContent(data))
+        .catch(error => console.error("Erreur lors de la récupération de l'article:", error));
         
     };
     
@@ -28,8 +31,6 @@ const ArticleDetails = () => {
     return (
     <div>
         <Header />
-
-
 
         {/* Utiliser dangerouslySetInnerHTML pour insérer du HTML */}
         <div dangerouslySetInnerHTML={{ __html: articleContent }}></div>

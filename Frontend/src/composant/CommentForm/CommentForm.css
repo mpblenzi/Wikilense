@@ -1,4 +1,6 @@
 .comment-form {
+    display: flex; /* Utilise flexbox pour aligner les éléments en ligne */
+    align-items: center; /* Centre les éléments verticalement */
     max-width: 500px; /* ajuste la largeur selon tes besoins */
     margin: 5px;
     padding: 20px;
@@ -8,7 +10,7 @@
 }
 
 .comment-form input[type="text"] {
-    width: calc(100% - 110px);
+    flex: 1; /* Permet au champ de texte de remplir l'espace disponible */
     padding: 10px;
     margin-right: 10px;
     border: 1px solid #ddd;
@@ -17,7 +19,6 @@
 }
 
 .comment-form button[type="submit"] {
-    width: 100px;
     padding: 10px;
     border: none;
     background-color: #007bff;

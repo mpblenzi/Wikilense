@@ -1,0 +1,169 @@
+INFO: Récupération des sous-catégories
+INFO: Récupération des sous-catégories
+INFO: Accès demandé à l'image de catégorie : cluster 3.jpg
+INFO: Accès demandé à l'image de catégorie : IMG_1477.JPG
+INFO: Accès demandé à l'image de catégorie : tinting process e-learning.jpg
+INFO: Accès demandé à l'image de catégorie : hc basket loading.jpg
+INFO: Accès demandé à l'image de catégorie : ar tray.jpg
+INFO: Accès demandé à l'image de catégorie : monture plastique.JPG
+INFO: Accès demandé à l'image de catégorie : drill3.jpg
+INFO: Accès demandé à l'image de catégorie : control arclamp.jpg
+INFO: Accès demandé à l'image de catégorie : autoandfinish.JPG
+INFO: Accès demandé à l'image de catégorie : Metal molds.jpg
+INFO: Accès demandé à l'image de catégorie : calculation.jpg
+INFO: Accès demandé à l'image de catégorie : polar.jpg
+INFO: Accès demandé à l'image de catégorie : IT-Manufacturing.jpg
+INFO: Accès demandé à l'image de catégorie : Methode et Management.jpg
+INFO: Accès demandé à l'image de catégorie : surfacing DS.jpg
+INFO: Accès demandé à l'image de catégorie : IMG_1477.JPG
+INFO: Accès demandé à l'image de catégorie : monture plastique.JPG
+INFO: Accès demandé à l'image de catégorie : cluster 3.jpg
+INFO: Accès demandé à l'image de catégorie : hc basket loading.jpg
+INFO: Accès demandé à l'image de catégorie : tinting process e-learning.jpg
+INFO: Accès demandé à l'image de catégorie : ar tray.jpg
+INFO: Accès demandé à l'image de catégorie : drill3.jpg
+INFO: Accès demandé à l'image de catégorie : control arclamp.jpg
+INFO: Accès demandé à l'image de catégorie : autoandfinish.JPG
+INFO: Accès demandé à l'image de catégorie : Metal molds.jpg
+INFO: Accès demandé à l'image de catégorie : calculation.jpg
+INFO: Accès demandé à l'image de catégorie : polar.jpg
+INFO: Accès demandé à l'image de catégorie : IT-Manufacturing.jpg
+INFO: Accès demandé à l'image de catégorie : Methode et Management.jpg
+INFO: Accès demandé à l'image de catégorie : surfacing DS.jpg
+INFO: Accès demandé à l'image de catégorie : IMG_1477.JPG
+INFO: Accès demandé à l'image de catégorie : monture plastique.JPG
+INFO: Accès demandé à l'image de catégorie : cluster 3.jpg
+INFO: Accès demandé à l'image de catégorie : hc basket loading.jpg
+INFO: Accès demandé à l'image de catégorie : tinting process e-learning.jpg
+INFO: Accès demandé à l'image de catégorie : ar tray.jpg
+INFO: Accès demandé à l'image de catégorie : drill3.jpg
+INFO: Accès demandé à l'image de catégorie : control arclamp.jpg
+INFO: Accès demandé à l'image de catégorie : autoandfinish.JPG
+INFO: Accès demandé à l'image de catégorie : Metal molds.jpg
+INFO: Accès demandé à l'image de catégorie : calculation.jpg
+INFO: Accès demandé à l'image de catégorie : polar.jpg
+INFO: Accès demandé à l'image de catégorie : IT-Manufacturing.jpg
+INFO: Accès demandé à l'image de catégorie : Methode et Management.jpg
+INFO: Accès demandé à l'image de catégorie : surfacing DS.jpg
+INFO: Accès demandé à l'image de catégorie : IMG_1477.JPG
+INFO: Accès demandé à l'image de catégorie : monture plastique.JPG
+INFO: Accès demandé à l'image de catégorie : cluster 3.jpg
+INFO: Accès demandé à l'image de catégorie : hc basket loading.jpg
+INFO: Accès demandé à l'image de catégorie : tinting process e-learning.jpg
+INFO: Accès demandé à l'image de catégorie : ar tray.jpg
+INFO: Accès demandé à l'image de catégorie : drill3.jpg
+INFO: Accès demandé à l'image de catégorie : control arclamp.jpg
+INFO: Accès demandé à l'image de catégorie : autoandfinish.JPG
+INFO: Accès demandé à l'image de catégorie : calculation.jpg
+INFO: Accès demandé à l'image de catégorie : Metal molds.jpg
+INFO: Accès demandé à l'image de catégorie : polar.jpg
+INFO: Accès demandé à l'image de catégorie : IT-Manufacturing.jpg
+INFO: Accès demandé à l'image de catégorie : Methode et Management.jpg
+INFO: Accès demandé à l'image de catégorie : surfacing DS.jpg
+INFO: Accès demandé à l'image de catégorie : cluster 3.jpg
+INFO: Accès demandé à l'image de catégorie : calculation.jpg
+INFO: Accès demandé à l'image de catégorie : control arclamp.jpg
+INFO: Accès demandé à l'image de catégorie : drill3.jpg
+INFO: Accès demandé à l'image de catégorie : monture plastique.JPG
+INFO: Accès demandé à l'image de catégorie : Metal molds.jpg
+INFO: Accès demandé à l'image de catégorie : autoandfinish.JPG
+INFO: Accès demandé à l'image de catégorie : polar.jpg
+INFO: Accès demandé à l'image de catégorie : IMG_1477.JPG
+INFO: Accès demandé à l'image de catégorie : tinting process e-learning.jpg
+INFO: Accès demandé à l'image de catégorie : hc basket loading.jpg
+INFO: Accès demandé à l'image de catégorie : ar tray.jpg
+INFO: Accès demandé à l'image de catégorie : IT-Manufacturing.jpg
+INFO: Accès demandé à l'image de catégorie : Methode et Management.jpg
+INFO: Accès demandé à l'image de catégorie : surfacing DS.jpg
+INFO: Récupération des sous-catégories de la catégorie avec l'id 3
+INFO: Récupération des sous-catégories de la catégorie avec l'id 3
+INFO: Récupération des articles de la catégorie avec l'id 36
+INFO: Récupération des articles de la catégorie avec l'id 37
+INFO: Récupération des articles de la catégorie avec l'id 38
+INFO: Récupération des articles de la catégorie avec l'id 36
+INFO: Récupération des articles de la catégorie avec l'id 37
+INFO: Récupération des articles de la catégorie avec l'id 38
+INFO: Récupération des sous-catégories
+INFO: Accès demandé à l'image de catégorie : cluster 3.jpg
+INFO: Accès demandé à l'image de catégorie : IMG_1477.JPG
+INFO: Accès demandé à l'image de catégorie : tinting process e-learning.jpg
+INFO: Accès demandé à l'image de catégorie : hc basket loading.jpg
+INFO: Récupération des sous-catégories
+INFO: Accès demandé à l'image de catégorie : ar tray.jpg
+INFO: Accès demandé à l'image de catégorie : monture plastique.JPG
+INFO: Accès demandé à l'image de catégorie : drill3.jpg
+INFO: Accès demandé à l'image de catégorie : control arclamp.jpg
+INFO: Accès demandé à l'image de catégorie : autoandfinish.JPG
+INFO: Accès demandé à l'image de catégorie : Metal molds.jpg
+INFO: Accès demandé à l'image de catégorie : calculation.jpg
+INFO: Accès demandé à l'image de catégorie : polar.jpg
+INFO: Accès demandé à l'image de catégorie : IT-Manufacturing.jpg
+INFO: Accès demandé à l'image de catégorie : Methode et Management.jpg
+INFO: Accès demandé à l'image de catégorie : surfacing DS.jpg
+INFO: Accès demandé à l'image de catégorie : cluster 3.jpg
+INFO: Accès demandé à l'image de catégorie : IMG_1477.JPG
+INFO: Accès demandé à l'image de catégorie : tinting process e-learning.jpg
+INFO: Accès demandé à l'image de catégorie : hc basket loading.jpg
+INFO: Accès demandé à l'image de catégorie : ar tray.jpg
+INFO: Accès demandé à l'image de catégorie : monture plastique.JPG
+INFO: Accès demandé à l'image de catégorie : drill3.jpg
+INFO: Accès demandé à l'image de catégorie : control arclamp.jpg
+INFO: Accès demandé à l'image de catégorie : autoandfinish.JPG
+INFO: Accès demandé à l'image de catégorie : Metal molds.jpg
+INFO: Accès demandé à l'image de catégorie : calculation.jpg
+INFO: Accès demandé à l'image de catégorie : IT-Manufacturing.jpg
+INFO: Accès demandé à l'image de catégorie : polar.jpg
+INFO: Accès demandé à l'image de catégorie : Methode et Management.jpg
+INFO: Accès demandé à l'image de catégorie : surfacing DS.jpg
+INFO: Accès demandé à l'image de catégorie : cluster 3.jpg
+INFO: Accès demandé à l'image de catégorie : IMG_1477.JPG
+INFO: Accès demandé à l'image de catégorie : tinting process e-learning.jpg
+INFO: Accès demandé à l'image de catégorie : hc basket loading.jpg
+INFO: Accès demandé à l'image de catégorie : ar tray.jpg
+INFO: Accès demandé à l'image de catégorie : cluster 3.jpg
+INFO: Accès demandé à l'image de catégorie : monture plastique.JPG
+INFO: Accès demandé à l'image de catégorie : IMG_1477.JPG
+INFO: Accès demandé à l'image de catégorie : drill3.jpg
+INFO: Accès demandé à l'image de catégorie : tinting process e-learning.jpg
+INFO: Accès demandé à l'image de catégorie : control arclamp.jpg
+INFO: Accès demandé à l'image de catégorie : hc basket loading.jpg
+INFO: Accès demandé à l'image de catégorie : autoandfinish.JPG
+INFO: Accès demandé à l'image de catégorie : Metal molds.jpg
+INFO: Accès demandé à l'image de catégorie : drill3.jpg
+INFO: Accès demandé à l'image de catégorie : monture plastique.JPG
+INFO: Accès demandé à l'image de catégorie : calculation.jpg
+INFO: Accès demandé à l'image de catégorie : IT-Manufacturing.jpg
+INFO: Accès demandé à l'image de catégorie : control arclamp.jpg
+INFO: Accès demandé à l'image de catégorie : polar.jpg
+INFO: Accès demandé à l'image de catégorie : surfacing DS.jpg
+INFO: Accès demandé à l'image de catégorie : autoandfinish.JPG
+INFO: Accès demandé à l'image de catégorie : Methode et Management.jpg
+INFO: Accès demandé à l'image de catégorie : calculation.jpg
+INFO: Accès demandé à l'image de catégorie : cluster 3.jpg
+INFO: Accès demandé à l'image de catégorie : IMG_1477.JPG
+INFO: Accès demandé à l'image de catégorie : tinting process e-learning.jpg
+INFO: Accès demandé à l'image de catégorie : polar.jpg
+INFO: Accès demandé à l'image de catégorie : hc basket loading.jpg
+INFO: Accès demandé à l'image de catégorie : ar tray.jpg
+INFO: Accès demandé à l'image de catégorie : drill3.jpg
+INFO: Accès demandé à l'image de catégorie : monture plastique.JPG
+INFO: Accès demandé à l'image de catégorie : IT-Manufacturing.jpg
+INFO: Accès demandé à l'image de catégorie : control arclamp.jpg
+INFO: Accès demandé à l'image de catégorie : surfacing DS.jpg
+INFO: Accès demandé à l'image de catégorie : autoandfinish.JPG
+INFO: Accès demandé à l'image de catégorie : Metal molds.jpg
+INFO: Accès demandé à l'image de catégorie : calculation.jpg
+INFO: Accès demandé à l'image de catégorie : Methode et Management.jpg
+INFO: Accès demandé à l'image de catégorie : polar.jpg
+INFO: Accès demandé à l'image de catégorie : IT-Manufacturing.jpg
+INFO: Accès demandé à l'image de catégorie : Methode et Management.jpg
+INFO: Accès demandé à l'image de catégorie : surfacing DS.jpg
+INFO: Récupération des sous-catégories de la catégorie avec l'id 2
+INFO: Récupération des articles de la catégorie avec l'id 22
+INFO: Récupération des articles de la catégorie avec l'id 24
+INFO: Récupération des articles de la catégorie avec l'id 23
+INFO: Récupération des sous-catégories de la catégorie avec l'id 2
+INFO: Récupération des articles de la catégorie avec l'id 25
+INFO: Récupération des articles de la catégorie avec l'id 22
+INFO: Récupération des articles de la catégorie avec l'id 25
+INFO: Récupération des articles de la catégorie avec l'id 24

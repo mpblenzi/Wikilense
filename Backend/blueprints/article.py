@@ -1,7 +1,6 @@
 from flask import Blueprint, jsonify
 from db import *
 from flask import request,send_file, make_response
-
 from werkzeug.utils import secure_filename
 import os
 from colorama import Fore, Style
@@ -148,7 +147,7 @@ def replace_word(path_file_word):
     
     log("Le fichier "+ os.path.basename(path_file_word) +" a été supprimé")
 
-# Exemple hypothétique de fonction de transformation des chemins d'images en Python
+# Exemple de fonction de transformation des chemins d'images en Python
 def ajuster_chemins_images(path_fichier_html, title):
     # Lire le fichier HTML
     with open(path_fichier_html, 'r', encoding='utf-8') as file:
