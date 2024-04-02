@@ -22,6 +22,7 @@ const DeleteCommentButton = ({ commentId, onCommentDeleted  }) => {
 
     return (
         <button onClick={handleDelete} className="bin-button">
+        <div className='bin-delete_button'>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 39 7"
@@ -67,6 +68,8 @@ const DeleteCommentButton = ({ commentId, onCommentDeleted  }) => {
             d="M20.5 10.5L37.5 15.5L42.5 11.5L51.5 12.5L68.75 0L72 11.5L79.5 12.5H88.5L87 22L68.75 31.5L75.5066 25L86 26L87 35.5L77.5 48L70.5 49.5L80 50L77.5 71.5L63.5 58.5L53.5 68.5L65.5 70.5L45.5 73L35.5 79.5L28 67L16 63L12 51.5L0 48L16 25L22.5 17L20.5 10.5Z"
           ></path>
         </svg>
+        </div>
+        <span>Delete</span>
       </button>
     );
 };

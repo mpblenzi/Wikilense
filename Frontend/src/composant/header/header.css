@@ -4,8 +4,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 132px; 
-    padding: 0 20px; 
+    height: 132px;  
 }
 
 .logo {
@@ -23,6 +22,18 @@
     font-size: 47px;
 }
 
+.right-content {
+    justify-content: right;
+}
+
+.logo-Right {
+    width: 150px;
+    height: 50px;
+    object-fit: contain; /* Empêche la déformation de l'image */
+    display: flex;
+    margin-right: 15px;
+}
+
 .links a {
     font-size: 24px;
     margin-right: 100px; 
@@ -33,4 +44,11 @@
 
 .links a:hover {
     color: red;
+}
+
+.reserche-notification{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 50%;
 }

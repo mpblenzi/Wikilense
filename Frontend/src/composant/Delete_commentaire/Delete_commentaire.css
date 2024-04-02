@@ -1,23 +1,41 @@
 .bin-button {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
     justify-content: center;
-    width: 55px;
+    width: 80px;
     height: 55px;
     cursor: pointer;
     border: 0px;
     transition-duration: 0.3s;
     position: relative;
     overflow: hidden;
-    background-color: white;    
+    background-color: white; 
+    gap: 5px;
   }
+
+  .bin-delete_button{
+    display: flex;
+    flex-direction: column;
+  }
+
+  .span{
+    margin-left: 40px;
+  }
+
+  .delete_Button {
+    display: flex;
+    color: black;
+    align-items: center;
+    cursor: pointer;
+  }
+
   .bin-bottom {
     width: 15px;
     z-index: 2;
   }
   .bin-top {
-    width: 17px;
+    width: 15px;
     transform-origin: right;
     transition-duration: 0.3s;
     z-index: 2;
@@ -45,7 +63,7 @@
       opacity: 0;
     }
     to {
-      transform: translate(0%, 0%);
+      transform: translate(30%, 0%);
       opacity: 1;
     }
   }

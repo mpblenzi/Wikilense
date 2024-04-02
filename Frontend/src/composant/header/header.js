@@ -25,18 +25,20 @@ const Header = () => {
           <Link to="/new_articles">New articles</Link> 
           </div>
 
-          {/* Barre de recherche */}
-          <SearchBar/>
+          <div className='reserche-notification'>
+            {/* Barre de recherche */}
+            <SearchBar/>
 
-          {/* Icône de notification */}
-          <NotificationIcon/>
+            {/* Icône de notification */}
+            <NotificationIcon/>
+          </div>
         </div>
 
         <div className="right-content">
           {/* Logo sur la droite */}
-          <img src="/assets/LOFT TKS white logo HD (1).png" alt="Logo droite" className="logo" />
+          <img src="/assets/LOFT TKS white logo HD (1).png" alt="Logo droite" className="logo-Right" />
           {/*Rajouter le logo essilor luxo */}
-          <img src="/assets/EssilorLuxottica white logo.png" alt="Logo droite" className="logo" />
+          <img src="/assets/EssilorLuxottica white logo.png" alt="Logo droite" className="logo-Right" />
         </div>
         
 
