@@ -5,6 +5,8 @@ from blueprints.category import category_bp
 from blueprints.article import article_bp
 from blueprints.commentaire import commentaire_bp
 from blueprints.user import user_bp
+from blueprints.like import commentaire_likes_bp
+
 
 # Création de l'application
 app = Flask(__name__)
@@ -16,6 +18,7 @@ app.register_blueprint(image_bp, url_prefix='/image')
 app.register_blueprint(article_bp, url_prefix='/article')
 app.register_blueprint(commentaire_bp, url_prefix='/commentaire')
 app.register_blueprint(user_bp, url_prefix='/user')
+app.register_blueprint(commentaire_likes_bp, url_prefix='/like')
 
 #lancement de l'application
 if __name__ == "__main__":

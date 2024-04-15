@@ -1,3 +1,29 @@
+:root{
+    --EssilorLuxotica_Green_1: #11343A;
+    --EssilorLuxotica_Green_2: #115E42;
+    --EssilorLuxotica_Green_3: #6BA772;
+    --EssilorLuxotica_Green_4: #ACD8AA;
+    --EssilorLuxotica_Blue_1: #161A49;
+    --EssilorLuxotica_Blue_2: #004992;
+    --EssilorLuxotica_Blue_3: #5C8DB8;
+    --EssilorLuxotica_Blue_4: #8EC5E2;
+    --EssilorLuxotica_Bordeaux: #4A1A2C;
+    --EssilorLuxotica_Red_1 : #962324;
+    --EssilorLuxotica_Red_2 : #EE312F;
+    --EssilorLuxotica_Red_3 : #F3777A; 
+    --EssilorLuxotica_Brown : #6A4A3C;
+    --EssilorLuxotica_Orange : #E95145;
+    --EssilorLuxotica_Yellow_1 : #F5A000;
+    --EssilorLuxotica_Yellow_2 : #FAF06A;
+    --EssilorLuxotica_Grey_1 : #414042;
+    --EssilorLuxotica_Grey_2 : #6D6E72;
+    --EssilorLuxotica_Grey_3 : #BCBEC0;
+    --EssilorLuxotica_Grey_4 : #E6E7E8;
+    --EssilorLuxotica_Gold : #90734E;
+    --EssilorLuxotica_Silver : #A7A9AC;
+
+}
+
 body{
     margin: 0 0 0 0;
     background-color: #020814;

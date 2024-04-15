@@ -31,14 +31,22 @@ const ArticleDetails = () => {
     return (
     <div>
         <Header />
+        <div className='article-details'>
 
-        {/* Utiliser dangerouslySetInnerHTML pour insérer du HTML */}
-        <div dangerouslySetInnerHTML={{ __html: articleContent }}></div>
+            <div className="article-button_admin">
+                
+            </div>
 
-        <CommentForm articleId={articleId} onCommentSubmitted={handleCommentSubmitted} />
+            <div className="article_more_commentaire">
+                {/* Utiliser dangerouslySetInnerHTML pour insérer du HTML */}
+                <div dangerouslySetInnerHTML={{ __html: articleContent }}></div>
 
-        <CommentsList articleId={articleId} />
+                <CommentForm articleId={articleId} onCommentSubmitted={handleCommentSubmitted} />
 
+                <CommentsList articleId={articleId} />
+            </div>
+        
+        </div>
         <Footer />
     </div>
     );

@@ -10,8 +10,12 @@
     transition-duration: 0.3s;
     position: relative;
     overflow: hidden;
-    background-color: white; 
+    background-color: var(--EssilorLuxotica_Grey_4); 
     gap: 5px;
+  }
+
+  .bin-button:hover {
+    background-color: var(--EssilorLuxotica_Grey_4);
   }
 
   .bin-delete_button{
@@ -61,10 +65,12 @@
     from {
       transform: translate(-400%, -700%);
       opacity: 0;
+      background-color: (--EssilorLuxotica_Grey_4); 
     }
     to {
       transform: translate(30%, 0%);
       opacity: 1;
+      background-color: (--EssilorLuxotica_Grey_4); 
     }
   }
   

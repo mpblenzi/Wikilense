@@ -10,7 +10,13 @@
   position: relative;
   overflow: hidden;
   transition: all 0.3s;
+  background-color: var(--EssilorLuxotica_Grey_4); 
 }
+
+.editBtn:hover {
+  background-color: var(--EssilorLuxotica_Grey_4);
+}
+
 .editBtn::before {
   content: "";
   width: 200%;
@@ -56,4 +62,5 @@
   transform: scaleX(1);
   left: 0px;
   transform-origin: right;
+  background-color: var(--EssilorLuxotica_Grey_4);
 }
