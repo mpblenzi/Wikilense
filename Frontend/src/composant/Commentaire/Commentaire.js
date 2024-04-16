@@ -52,7 +52,7 @@ const CommentItem = ({
                         </div>
                     )}
 
-                    {/* <LikeButton
+                    <LikeButton
                         commentId={comment.ID}
                         initialLikesCount={comment.Nombre_Likes || 0}
                         isInitiallyLikedByCurrentUser={comment.CurrentUserHasLiked || false}
@@ -78,7 +78,7 @@ const CommentItem = ({
                                 });
                             });
                         }}
-                    /> */}
+                    />
 
                     {comment.ID_Utilisateur === currentUser && (
                         <div className="comment-actions">

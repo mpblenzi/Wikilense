@@ -33,7 +33,7 @@ def get_article(article_id):
     # Supposons que query_db retourne une liste de dictionnaires pour chaque ligne
     article = query_db('SELECT A.Titre, A.Date_Creation, A.Nombre_Likes, A.Nombre_Vues, B.Nom, B.Email FROM Article A INNER JOIN Utilisateur B ON A.ID_Utilisateur_Createur = B.ID WHERE A.[ID] = ?', [article_id])
 
-    # Assurez-vous que l'article a été trouvé
+    # On s'assure que l'article existe
     if not article:
         return "Article non trouvé", 404
 
@@ -103,8 +103,10 @@ def create_article2():
     replace_word(path_file_word)
     
     date_creation = datetime.datetime.now()
+
+    post = query_db('INSERT INTO [Wikilense].[dbo].[Article] values (?,?,?,?,0,0,1)', [title, category_id, account_id, date_creation])
     
-    post = query_db('INSERT INTO [Wikilense].[dbo].[Article] values (?,?,?,?,0,0)', [title, category_id, account_id, date_creation])
+    post = query_db('INSERT INTO [Wikilense].[dbo].[MotsCles] values (?)', [title.lower()])
     
     log("L'article "+ title +" a été créé avec succès")
     return jsonify({"success": "File uploaded successfully", "filename": filename, "Status": 200}), 200

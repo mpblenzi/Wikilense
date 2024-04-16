@@ -69,7 +69,7 @@ function NewArticle() {
                             toast.success('Article created successfully!');
                         }
                         else {
-                            toast.error('An error occurred while uploading the article. Please try again.2');
+                            toast.error('An error occurred while uploading the article. Please try again.');
                         }
                     })
 
