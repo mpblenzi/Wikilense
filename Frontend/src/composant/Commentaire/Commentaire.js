@@ -56,6 +56,7 @@ const CommentItem = ({
                         commentId={comment.ID}
                         initialLikesCount={comment.Nombre_Likes || 0}
                         isInitiallyLikedByCurrentUser={comment.CurrentUserHasLiked || false}
+                        userId={currentUser}
                         onToggle={(commentId, shouldLike) => {
                             return new Promise((resolve, reject) => {
                                 const action = shouldLike ? 'like_comment' : 'unlike_comment';

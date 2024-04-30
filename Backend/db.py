@@ -1,5 +1,6 @@
 import pyodbc
 from colorama import Fore, Style
+import asyncio
 
 server = 'AZFRCER0300\DWK1' 
 database = 'Wikilense' 
@@ -8,7 +9,7 @@ password = 'Qgx8NdQk5UKn49cKUVHgBfAd4nqeKZW6EbzkRjxS495ZDNhJw7'
 dsn = f'DRIVER={{ODBC Driver 17 for SQL Server}};SERVER={server};DATABASE={database};UID={username};PWD={password}'
 
 #fonction pour exécuter les requêtes SQL
-def query_db(query, args=(), one=False):
+async def query_db(query, args=(), one=False):
     cnxn = pyodbc.connect(dsn)
     cursor = cnxn.cursor()
     cursor.execute(query, args)
@@ -27,7 +28,8 @@ def query_db(query, args=(), one=False):
         cnxn.close()
         return (rv[0] if rv else None) if one else rv
 
-def log(message, level="info"):
+async def log(message, level):
+
     if level == "info":
         print(Fore.BLUE + message + Style.RESET_ALL)
     elif level == "success":

@@ -71,7 +71,7 @@ function Acceuil() {
             })
             .catch(error => console.error('Error fetching user:', error));
         
-        });
+        },[]);
 
     let navigate = useNavigate();
 
@@ -80,7 +80,7 @@ function Acceuil() {
     };
 
     return (
-        <div>
+        <div className='Acceuil'>
             <Header/>
 
                 <div className='MessageDeBienvenueAccueil'>
@@ -92,7 +92,7 @@ function Acceuil() {
                     <CategoryGrid categories={Category} />
                 </div>
                 <div className='BoutonAddAnArticleContainer'>
-                    <button onClick={handleButtonClick} className='BoutonAddAnArticle'><i class="uil uil-plus-circle"></i>Add an acticle </button>
+                    <button onClick={handleButtonClick} className='BoutonAddAnArticle'><i className="uil uil-plus-circle"></i>Add an acticle </button>
                 </div>
     
             <Footer/>

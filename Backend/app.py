@@ -6,6 +6,7 @@ from blueprints.article import article_bp
 from blueprints.commentaire import commentaire_bp
 from blueprints.user import user_bp
 from blueprints.like import commentaire_likes_bp
+from blueprints.keyword import keyword_bp
 
 
 # Création de l'application
@@ -19,6 +20,7 @@ app.register_blueprint(article_bp, url_prefix='/article')
 app.register_blueprint(commentaire_bp, url_prefix='/commentaire')
 app.register_blueprint(user_bp, url_prefix='/user')
 app.register_blueprint(commentaire_likes_bp, url_prefix='/like')
+app.register_blueprint(keyword_bp, url_prefix='/keyword')
 
 #lancement de l'application
 if __name__ == "__main__":

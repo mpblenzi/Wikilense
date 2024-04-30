@@ -9,10 +9,10 @@ const Header = () => {
 
     return (
       <div className="class-header">
-        {/* Logo sur la gauche avev image dans le dossier assets*/}
+        {/*logo sur la gauche avev image dans le dossier assets*/}
         
         <Link to="/">
-          <img src="/assets/New wikilens logo (1).png" alt="Logo gauche" className="logo"/>
+          <img src="/assets/New wikilens logo (1).png" alt="logo gauche" className="logo"/>
         </Link>
 
         {/* Liens et barre de recherche au centre */}
@@ -35,10 +35,10 @@ const Header = () => {
         </div>
 
         <div className="right-content">
-          {/* Logo sur la droite */}
-          <img src="/assets/LOFT TKS white logo HD (1).png" alt="Logo droite" className="logo-Right" />
+          {/* logo sur la droite */}
+          <img src="/assets/LOFT TKS white logo HD (1).png" alt="logo droite" className="logo-Right" />
           {/*Rajouter le logo essilor luxo */}
-          <img src="/assets/EssilorLuxottica white logo.png" alt="Logo droite" className="logo-Right" />
+          <img src="/assets/EssilorLuxottica white logo.png" alt="logo droite" className="logo-Right" />
         </div>
         
 

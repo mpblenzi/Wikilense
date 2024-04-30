@@ -5,6 +5,7 @@ import { useMsal } from '@azure/msal-react';
 import { Bounce, ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import FormulaireArticle from '../../composant/Page_New_Article/FormulaireArticle/FormulaireArticle';
+import './NewArticle.css';
 
 function NewArticle() {
     const [technologies, setTechnologies] = useState([]);
@@ -31,7 +32,6 @@ function NewArticle() {
                 .then(data => setCategories(data))
                 .catch(error => console.error('Error fetching categories:', error));
         }
-
     }, [selectedTechnology, selectedCategory]);
 
     const handleSubmit = (event) => {
@@ -101,7 +101,7 @@ function NewArticle() {
     return (
         <div>
             <Header />
-            <div style={{ margin: '0 auto', padding: '20px' }}>
+            <div className='Create_article'>
                 <h2>Create a New Article</h2>
                 <ToastContainer
                     position="bottom-center"

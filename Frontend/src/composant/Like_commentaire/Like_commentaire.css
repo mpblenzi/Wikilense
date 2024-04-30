@@ -1,5 +1,5 @@
 /*------ Settings ------*/
-.container {
+.container-like {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -8,35 +8,35 @@
     user-select: none;
   }
   
-  .container .thumbs-up-regular {
+  .container-like .thumbs-up-regular {
     position: flex;
     animation: keyframes-fill .5s;
   }
   
-  .container .thumbs-up-solid {
+  .container-like .thumbs-up-solid {
     position: flex;
     display: none;
     animation: keyframes-fill .5s;
   }
   
   /* ------ On check event ------ */
-  .container input:checked ~ .thumbs-up-regular {
+  .container-like input:checked ~ .thumbs-up-regular {
     display: none;
   }
   
-  .container input:checked ~ .thumbs-up-solid {
+  .container-like input:checked ~ .thumbs-up-solid {
     display: block;
   }
   
   /* ------ Hide the default checkbox ------ */
-  .container input {
+  .container-like input {
     position: absolute;
     opacity: 0;
     cursor: pointer;
     height: 0;
     width: 0;
   }
-  .container label {
+  .container-like label {
     display: flex;
     justify-content: center;
     align-items: center;

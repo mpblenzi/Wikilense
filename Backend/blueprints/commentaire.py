@@ -1,13 +1,15 @@
 from flask import Blueprint, jsonify, request
-from db import query_db
+from db import query_db, log
 import datetime
+import asyncio
 
 commentaire_bp = Blueprint('commentaire', __name__)
 
 @commentaire_bp.route('/Add_comment/', methods=['POST'])
-def post_comment():
+async def post_comment():
     # Assurez-vous que la requête contient du JSON
     if not request.is_json:
+        await log("La requête doit être en JSON", "error")
         return jsonify({"error": "La requête doit être en JSON"}), 400
 
     data = request.get_json()
@@ -23,17 +25,18 @@ def post_comment():
     # Insérer le commentaire dans la base de données
     #  Avoir la date et heure actuelle en france 
     try:
-        print(id_article, id_utilisateur, contenu, datetime.datetime.now())
-        query_db('INSERT INTO Commentaire (ID_Article, ID_Utilisateur, Contenu, Date_Publication, Active, Modifier, ID_Commentaire) VALUES (?, ?, ?, ?, 1, 0, NULL)',
+        await log(f"Ajout du commentaire pour l'article {id_article}", "info")
+        await query_db('INSERT INTO Commentaire (ID_Article, ID_Utilisateur, Contenu, Date_Publication, Active, Modifier, ID_Commentaire) VALUES (?, ?, ?, ?, 1, 0, NULL)',
                 (id_article, id_utilisateur, contenu, datetime.datetime.now()))
         return jsonify({"success": "Commentaire ajouté avec succès"}), 200
     except Exception as e:
+        await log(f"Erreur lors de l'ajout du commentaire pour l'article {id_article}: {e}", "error")
         return jsonify({"error": str(e)}), 500
 
 @commentaire_bp.route('/Get_comments/<int:id_article>', methods=['GET'])
-def get_comments(id_article):
+async def get_comments(id_article):
     # Récupérer tous les commentaires et réponses actifs pour l'article
-    all_comments = query_db("""
+    all_comments = await query_db("""
         SELECT 
             A.[ID], A.[ID_Article], A.[ID_Utilisateur], A.[Contenu], 
             A.[Date_Publication], A.[Nombre_Likes], B.Nom, A.Active, 
@@ -65,13 +68,14 @@ def get_comments(id_article):
     return jsonify(top_level_comments)
 
 @commentaire_bp.route('/Delete_comment/<int:id_comment>', methods=['DELETE'])
-def delete_comment(id_comment):
+async def delete_comment(id_comment):
     # Supprimer le commentaire
-    query_db('UPDATE Commentaire SET Active = 0 WHERE ID = ?', id_comment)
+    await query_db('UPDATE Commentaire SET Active = 0 WHERE ID = ?', id_comment)
+    await log(f"Commentaire supprimé avec succès : {id_comment}", "success")
     return jsonify({"success": "Commentaire supprimé avec succès"}), 200
 
 @commentaire_bp.route('/edit/<int:id_comment>', methods=['PUT'])
-def edit_comment(id_comment):
+async def edit_comment(id_comment):
     # Assurez-vous que la requête contient du JSON
     if not request.is_json:
         return jsonify({"error": "La requête doit être en JSON"}), 400
@@ -79,7 +83,6 @@ def edit_comment(id_comment):
     data = request.get_json()
 
     # Valider les données reçues
-    print(data)
     contenu = data.get('content')
     
     if not contenu:
@@ -87,15 +90,18 @@ def edit_comment(id_comment):
     
     # Insérer le commentaire dans la base de données mettre le champ modifier à 1 et le champ Modifier a 1
     try:
-        query_db('UPDATE Commentaire SET Contenu = ?, Modifier = 1 WHERE ID = ?', (contenu, id_comment))
+        await query_db('UPDATE Commentaire SET Contenu = ?, Modifier = 1 WHERE ID = ?', (contenu, id_comment))
+        await log(f"Commentaire modifié avec succès : {id_comment}", "success")
         return jsonify({"success": "Commentaire modifié avec succès"}), 200
     except Exception as e:
+        await log(f"Erreur lors de la modification du commentaire {id_comment}: {e}", "error")
         return jsonify({"error": str(e)}), 500
 
 @commentaire_bp.route('/Add_comment_reply/', methods=['POST'])
-def post_comment_reply():
+async def post_comment_reply():
     # Assurez-vous que la requête contient du JSON
     if not request.is_json:
+        await log("La requête doit être en JSON", "error")
         return jsonify({"error": "La requête doit être en JSON"}), 400
 
     data = request.get_json()
@@ -107,13 +113,15 @@ def post_comment_reply():
     id_article_reply = data.get('ID_Article_Reply')
     
     if not all([id_article, id_utilisateur, contenu]):
+        await log("il manque des données pour l'ajout du commentaire", "error")
         return jsonify({"error": "Données manquantes pour l'ajout du commentaire"}), 400
     
     # Insérer le commentaire dans la base de données
     try:
-        print(id_article, id_utilisateur, contenu, datetime.datetime.now())
-        query_db('INSERT INTO Commentaire (ID_Article, ID_Utilisateur, Contenu, Date_Publication, Active, Modifier, ID_Commentaire) VALUES (?, ?, ?, ?, 1, 0, ?)',
+        await log(f"Ajout du commentaire pour l'article {id_article}", "info")
+        await query_db('INSERT INTO Commentaire (ID_Article, ID_Utilisateur, Contenu, Date_Publication, Active, Modifier, ID_Commentaire) VALUES (?, ?, ?, ?, 1, 0, ?)',
                 (id_article, id_utilisateur, contenu, datetime.datetime.now(), id_article_reply))
         return jsonify({"success": "Commentaire ajouté avec succès"}), 200
     except Exception as e:
+        await log(f"Erreur lors de l'ajout du commentaire pour l'article {id_article}: {e}", "error")
         return jsonify({"error": str(e)}), 500

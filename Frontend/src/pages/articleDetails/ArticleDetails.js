@@ -16,7 +16,7 @@ const ArticleDetails = () => {
         .then(response => response.text()) // Traiter la réponse comme du texte
         .then(data => setArticleContent(data))
         .catch(error => console.error("Erreur lors de la récupération de l'article:", error));
-    }, []);
+    }, [articleId]);
 
     const handleCommentSubmitted = () => {
         // Recharger le contenu de l'article après la soumission d'un commentaire
