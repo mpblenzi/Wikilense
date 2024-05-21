@@ -9,8 +9,10 @@ keyword_bp = Blueprint('keyword', __name__)
 @keyword_bp.route('/AllKeyOnlyOne', methods=['GET'])
 async def AllKeyOnlyOne():
     
-    result = await query_db('SELECT * FROM Keyword WHERE MotCle != ?', (request.args.get('MotCle'),))
+    result = await query_db('SELECT * FROM MotsCles WHERE MotCle != ?', (request.args.get('MotCle'),))
     
     return jsonify(result)
+
+
     
     

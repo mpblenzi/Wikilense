@@ -4,8 +4,6 @@ import SelectionCategorie from '../SelectionCategorie/SelectionCategorie';
 import InputTitre from '../InputTitre/InputTitre';
 import TelechargementFichier from '../TelechargementFichier/TelechargementFichier';
 import './FormulaireArticle.css';
-import { useState } from 'react';
-
 const FormulaireArticle = ({
   technologies, categories, selectedTechnology, setSelectedTechnology,
   selectedCategory, setSelectedCategory, title, setTitle, file, setFile, handleSubmit

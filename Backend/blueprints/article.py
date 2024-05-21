@@ -100,8 +100,6 @@ async def create_article2():
     # Save the document as HTML
     doc.save(path_file_html, options)
     
-    #attendre que le fichier soit converti en html avant de continuer
-    
     await log("Le fichier "+ filename +" a été converti en HTML dans le Fontend avec succès", "success")
     
     await rewrite_html(path_file_html)
@@ -116,11 +114,12 @@ async def create_article2():
     
     #ajouter l'article dans la base de données et les mots clés
     post = await query_db('INSERT INTO [Wikilense].[dbo].[Article] values (?,?,?,?,0,0,1)', [title, category_id, account_id, date_creation])
-    post = await query_db('INSERT INTO [Wikilense].[dbo].[MotsCles] values (?)', [title.lower()])
     
     await log("L'article "+ title +" a été créé avec succès", "success")
     
-    await beginning_Keywords(title.lower(), )
+    await insert_Keywords(title.lower())
+    
+    await recherche_mot_clef(title.lower())
     
     return jsonify({"success": "File uploaded successfully", "filename": filename, "Status": 200}), 200
 
@@ -196,7 +195,7 @@ async def chercher_mot_et_lien(nom_fichier, mot):
                 href = parent.get('href')
                 if href.startswith('http'):
                     print(f"Le mot '{mot}' est un lien href redirigeant vers un autre lien: {href}")
-                    
+    
 async def Recherche_mot_clef(html_content, mot_a_chercher, lien_redirection):
     # Charger le contenu HTML dans BeautifulSoup
     soup = BeautifulSoup(html_content, 'html.parser')
@@ -254,17 +253,103 @@ async def Recherche_mot_clef(html_content, mot_a_chercher, lien_redirection):
     # Retourner le HTML modifié
     return str(soup)
 
-async def beginning_Keywords(New_Keywords, ):
+async def insert_Keywords(New_Keywords):
     # Récupérer les mots clés existants
-    existing_keywords = await query_db('SELECT MotCle FROM Keyword')
+    existing_keywords = await query_db('SELECT MotCle FROM MotsCles')
     existing_keywords = [keyword['MotCle'] for keyword in existing_keywords]
 
+    print("Mots clés existants :", existing_keywords)
     # Diviser les nouveaux mots clés en une liste
     new_keywords = New_Keywords.split()
 
     # Ajouter les nouveaux mots clés à la base de données
     for keyword in new_keywords:
         if keyword.lower() not in existing_keywords:
-            await query_db('INSERT INTO Keyword (MotCle) VALUES (?)', (keyword.lower(),))
+            await query_db('INSERT INTO MotsCles (MotCle) VALUES (?)', (keyword.lower(),))
 
     await log("Les mots clés ont été ajoutés avec succès", "success")
+    
+
+async def recherche_mot_clef (mot_clef):
+    
+    #trouver les articles dans le frontend 
+    path = os.getcwd()
+    path_article = os.path.join(path, "..", "Frontend", "public", "article")
+    print(path_article)
+    #recuperer touts les fichiers HTML dans le dossier article
+    for root, dirs, files in os.walk(path_article):
+        #parcourir les dossiers
+        for name in dirs:
+            #parcourir les fichiers
+            for file in os.listdir(os.path.join(root, name)):
+                #verifier si le fichier est un fichier html
+                if file.endswith(".html"):
+                    #chercher le mot clef dans le fichier html
+                    print("Le mot clef est : ", file)
+                    recherche_motClef_in_HTML()
+    
+    
+    
+                    
+    #regarder si le mot clef ce trouve dans le fichier html
+    #si oui, ajouter un lien vers le mot clef
+    #si non, continue
+    
+
+async def recherche_motClef_in_HTML(html_content, mot_a_chercher, lien_redirection):
+    
+    # Charger le contenu HTML dans BeautifulSoup
+    soup = BeautifulSoup(html_content, 'html.parser')
+
+    print("le mot à chercher est : ", mot_a_chercher)
+    print("Contenu HTML chargé avec succès...")
+    print(f"Recherche du mot '{mot_a_chercher}' dans le fichier HTML...")
+
+    # Expression régulière pour trouver le mot avec insensibilité à la casse
+    regex_mot = re.compile(re.escape(mot_a_chercher), re.IGNORECASE)
+
+    # Trouver tous les éléments de texte contenant le mot à chercher
+    balises_texte = soup.find_all(string=regex_mot)
+
+    # Pour chaque balise texte trouvée
+    for balise in balises_texte:
+        parent = balise.parent
+        # Si le parent est un élément a ou script ou title, passer à la prochaine balise
+        if parent.name in ["a", "script", "title"]:
+            continue
+        # Découper la phrase en deux parties : avant et après le mot recherché
+        if mot_a_chercher.lower() in balise.lower():
+            
+            if parent.name == "a":
+                continue
+            
+            # Découper la phrase en deux parties : avant et après le mot recherché
+            phrases = re.split(r'(\b' + re.escape(mot_a_chercher) + r'\b)', balise, flags=re.IGNORECASE)
+
+            # Créer une nouvelle balise <span> pour contenir la phrase avant le mot recherché
+            span_avant = soup.new_tag("span")
+            span_avant.string = ''.join(phrases[:2])  # Concaténer les deux premiers éléments de la liste phrases
+
+            # Créer une nouvelle balise <a> pour le lien de redirection
+            nouvelle_balise = soup.new_tag("a", href=lien_redirection, target="_blank")
+            nouvelle_balise.string = phrases[1]  # Utiliser le mot recherché comme texte pour la balise <a>
+
+            # Créer une nouvelle balise <span> pour contenir la phrase après le mot recherché
+            span_apres = soup.new_tag("span")
+            span_apres.string = ''.join(phrases[2:])  # Concaténer les éléments restants de la liste phrases
+            
+            #retirer le mot recherché de loa balise avant y compris en respectant la casses
+            span_avant.string = re.sub(re.escape(mot_a_chercher), '', span_avant.string, flags=re.IGNORECASE)
+
+            print("Phrase avant la modification :", ''.join(phrases))
+            print("Phrase après la modification :", span_avant, nouvelle_balise, span_apres)
+            
+            print("--------------------")
+            
+            # Insérer les nouvelles balises dans l'arbre DOM
+            balise.replace_with(span_avant)
+            span_avant.insert_after(nouvelle_balise)
+            nouvelle_balise.insert_after(span_apres)
+
+    # Retourner le HTML modifié
+    return str(soup)

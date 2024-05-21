@@ -36,7 +36,6 @@ function NewArticle() {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        console.log(selectedTechnology, selectedCategory, title, file);
 
         //si tout les champs sont remplis
         if (selectedTechnology && selectedCategory && title && file) {
