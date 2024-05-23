@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify
-from db import query_db, log
+from utils.db import query_db, log
 from flask import Flask, send_from_directory
 import asyncio
 

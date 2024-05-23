@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify, request
-from db import query_db, log
+from utils.db import query_db, log
 import datetime
 import asyncio
 

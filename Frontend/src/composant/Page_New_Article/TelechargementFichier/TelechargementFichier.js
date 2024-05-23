@@ -1,11 +1,15 @@
 import React from 'react';
 
 const TelechargementFichier = ({ file, setFile }) => (
-  <label>
-    Téléchargez votre fichier Word :
-    <input type="file" onChange={(e) => setFile(e.target.files[0])} />
-    <span>{file ? file.name : "Aucun fichier sélectionné"}</span>
-  </label>
+  <div>
+    <label htmlFor="file-upload" className="custom-file-upload">
+      Upload your Word file
+    </label>
+    <input id="file-upload" type="file" onChange={(e) => setFile(e.target.files[0])} />
+    <div className="file-preview">
+      {file ? file.name : "No file selected"}
+    </div>
+  </div>
 );
 
 export default TelechargementFichier;

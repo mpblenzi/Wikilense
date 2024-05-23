@@ -1,20 +1,22 @@
-.Acceuil{
-  margin: 0 0 0 0;
+/* acceuil.css */
+.Acceuil {
+  margin: 0;
   background-color: #020814;
 }
 
 .MessageDeBienvenueAccueil {
   color: #fff;
   text-align: center;
+  padding: 20px;
 }
 
 .MessageDeBienvenueAccueil h1 {
-    font-size: 50px;
+  font-size: 50px;
 }
 
 .MessageDeBienvenueAccueil h2 {
-    font-size: 40px;
-    font-weight: normal;
+  font-size: 40px;
+  font-weight: normal;
 }
 
 .BoutonAddAnArticleContainer {
@@ -32,9 +34,8 @@
   font-size: 36px;
   cursor: pointer;
   transition: 0.2s linear;
-  
 }
 
 .BoutonAddAnArticleContainer button:hover {
-    transform: scale(1.1);
+  transform: scale(1.1);
 }

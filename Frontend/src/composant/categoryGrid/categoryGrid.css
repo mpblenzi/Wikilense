@@ -1,6 +1,7 @@
+/* categoryGrid.css */
 .grid {
   display: grid;
-  margin-left: 30px;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 30px;
+  grid-template-columns: repeat(4, 1fr); /* Ajustez le nombre de colonnes selon vos besoins */
+  gap: 20px;
+  padding: 20px;
 }

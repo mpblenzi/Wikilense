@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify
-from db import *
+from utils.db import *
 from flask import request,send_file, make_response
 
 

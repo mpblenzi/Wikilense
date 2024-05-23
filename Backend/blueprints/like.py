@@ -1,5 +1,5 @@
 from flask import Blueprint, request, jsonify
-from db import query_db, log
+from utils.db import query_db, log
 import asyncio
 
 commentaire_likes_bp = Blueprint('commentaire_likes', __name__)
