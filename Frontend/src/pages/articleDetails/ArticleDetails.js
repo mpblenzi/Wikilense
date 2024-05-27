@@ -3,7 +3,6 @@ import { useParams } from 'react-router-dom';
 import './ArticleDetails.css';
 import CommentForm from '../../composant/CommentForm/CommentForm';
 import CommentsList from '../../composant/CommentsList/CommentsList';
-import Footer from '../../composant/footer/footer';
 import Header from '../../composant/header/header';
 
 const ArticleDetails = () => {
@@ -40,14 +39,14 @@ const ArticleDetails = () => {
             <div className="article_more_commentaire">
                 {/* Utiliser dangerouslySetInnerHTML pour insérer du HTML */}
                 <div dangerouslySetInnerHTML={{ __html: articleContent }}></div>
-
+                
                 <CommentForm articleId={articleId} onCommentSubmitted={handleCommentSubmitted} />
 
                 <CommentsList articleId={articleId} />
             </div>
         
         </div>
-        <Footer />
+        {/* <Footer /> */}
     </div>
     );
 };

@@ -89,7 +89,7 @@ function Acceuil() {
           <i className="uil uil-plus-circle"></i>Add an article
         </button>
       </div>
-      <Footer/>
+      {/* <Footer/> */}
     </div>
   );
 }

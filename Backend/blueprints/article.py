@@ -37,6 +37,8 @@ async def get_article(article_id):
     if not os.path.exists(path_file_html):
         await log("Fichier HTML non trouvé", "error")
         return "Fichier HTML non trouvé", 404
+    
+    await increment_article_views(article_id)
 
     return send_file(path_file_html)
 
@@ -88,11 +90,18 @@ async def create_article2():
     await insert_Keywords(title.lower())
     await insert_Keywords_by_article(title.lower())
     
-    # trouve le lien de redirection pour le mot clé EN COURS DE DEVELOPPEMENT
-    # await recherche_lien_fonction_Key_word(title.lower())  # Décommenter cette ligne si nécessaire EN COURS DE DEVELOPPEMENT
-    
-    # await recherche_mot_clef_By_article(title.lower())  # Décommenter cette ligne si nécessaire EN COURS DE DEVELOPPEMENT
+    await recherche_mot_clef_By_article(title.lower())
 
-    
+    await find_Key_Word_in_html(title.lower())  # Décommenter cette ligne si nécessaire EN COURS DE DEVELOPPEMENT
     
     return jsonify({"success": "File uploaded successfully", "filename": filename, "Status": 200}), 200
+
+
+# Fonction pour incrémenter le compteur de vues
+async def increment_article_views(article_id):
+    query = 'UPDATE [Article] SET Nombre_Vues = ISNULL(Nombre_Vues, 0) + 1 WHERE ID = ?'
+    await query_db(query, [article_id])
+    
+async def get_view_by_article(id_article):
+    view = await query_db('SELECT Nombre_Vues FROM Article WHERE [ID] = ?', [id_article])
+    return view[0]['Nombre_Vues']

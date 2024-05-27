@@ -8,7 +8,7 @@ function NewArticles() {
     <div>
       <Header/>
         <p>New Article</p>
-      <Footer/>
+      {/* <Footer/> */}
     </div>
   );
 }

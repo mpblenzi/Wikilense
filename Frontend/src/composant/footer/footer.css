@@ -2,6 +2,9 @@
 body {
     margin: 0;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
 .footer {
@@ -11,7 +14,7 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    position: flex;
+    position: relative; /* Changed from 'flex' */
     bottom: 0;
 }
 

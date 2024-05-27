@@ -33,7 +33,7 @@ const FormulaireArticle = ({
         <TelechargementFichier file={file} setFile={setFile} />
       </div>
 
-      <div className="buttons">
+      <div className="buttonssssss">
         <button type="button" onClick={() => { /* logiques pour annuler */ }}>Cancel</button>
         <button type="submit">Publish article</button>
       </div>

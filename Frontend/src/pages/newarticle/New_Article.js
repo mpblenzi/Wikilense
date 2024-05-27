@@ -134,7 +134,7 @@ function NewArticle() {
                     />
                 </div>
             </div>
-            <Footer />
+            {/* <Footer /> */}
         </div>
     );
 }

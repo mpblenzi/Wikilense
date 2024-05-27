@@ -1,0 +1,50 @@
+/* TelechargementFichier.css */
+.file-upload-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    border: 2px dashed #ccc;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+    transition: background-color 0.3s ease;
+  }
+  
+  .file-upload-container:hover {
+    background-color: #f1f1f1;
+  }
+
+  .file-upload-container input {
+    border: none;
+  }
+  
+  .custom-file-upload {
+    display: inline-block;
+    padding: 10px 20px;
+    cursor: pointer;
+    background-color: #007bff;
+    color: white;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .custom-file-upload:hover {
+    background-color: #0056b3;
+  }
+  
+  .custom-file-upload i {
+    margin-right: 8px;
+  }
+  
+  .file-preview {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #666;
+  }
+  
+  #file-upload {
+    display: none;
+  }
+  

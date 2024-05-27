@@ -50,22 +50,27 @@ const CategoryModal = ({ category, closeModal }) => {
   return (
     <div className={`modal-overlay ${visible ? 'visible' : ''}`} onClick={closeModalAndReset}>
       <div className={`modal-content ${visible ? 'visible' : ''}`} onClick={(e) => e.stopPropagation()}>
-        <h2>{category.Nom}</h2>
-        {sousCategories.map((sousCategory) => (
-          <div key={sousCategory.ID} className="sous-category">
-            <div className="sous-category-name">{sousCategory.Nom}</div>
-            <div className="articles">
-              {sousCategory.articles.map((article) => (
-                <div key={article.id} className="article">
-                  <Link to={`/articles/${article.ID}`}>{article.Titre}</Link>
-                </div>
-              ))}
+        <div className="modal-header">
+          <h2 className="modal-title">{category.Nom}</h2>
+          <button className='subscribe-button'>Subscribe to this category <i className="uil uil-bell"></i></button>
+          <button className="modal-close" onClick={closeModalAndReset}>Close &#x2715;</button>
+        </div>
+        <div className="modal-body">
+          {sousCategories.map((sousCategory) => (
+            <div key={sousCategory.ID} className="sous-category">
+              <div className="sous-category-name">{sousCategory.Nom}</div>
+              <div className="articles">
+                {sousCategory.articles.map((article) => (
+                  <div key={article.id} className="article">
+                    <Link to={`/articles/${article.ID}`}>{article.Titre}</Link>
+                  </div>
+                ))}
+              </div>
             </div>
-          </div>
-        ))}
-        <div className="modal-divider">
-          <button className='SubscribeToThisCategory'>Subscribe to this category <i className="uil uil-bell"></i></button>
-          <button className='CloseButtonModalDivider' onClick={closeModalAndReset}>Close <i className="uil uil-times-circle"></i></button>
+          ))}
+        </div>
+        <div className="modal-footer">
+          <button className='prev-button' onClick={closeModalAndReset}>Prev</button>
         </div>
       </div>
     </div>
