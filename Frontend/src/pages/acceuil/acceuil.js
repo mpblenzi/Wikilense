@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import './acceuil.css';
 import { useNavigate } from 'react-router-dom';
 import Header from '../../composant/header/header';
-import Footer from '../../composant/footer/footer';
 import CategoryGrid from '../../composant/categoryGrid/categoryGrid';
 import { useMsal } from '@azure/msal-react';
 

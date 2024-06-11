@@ -4,7 +4,7 @@ import os
 import datetime
 import aspose.words as aw
 from utils.db import query_db, log  # Importation des fonctions utilitaires pour la base de données et les logs
-from utils.html_processing import * # Importation des fonctions de traitement HTML
+from utils.html_processing import rewrite_html,ajuster_chemins_images, replace_word, insert_Keywords, insert_Keywords_by_article, recherche_mot_clef_By_article, find_Key_Word_in_html  # Importation des fonctions de traitement HTML
 from utils.validation import validate_file  # Importation de la fonction de validation de fichier
 
 # Création d'un blueprint pour les routes de gestion des articles
@@ -27,20 +27,27 @@ async def get_article_by_id(id_article):
 # Route pour obtenir le fichier HTML d'un article
 @article_bp.route('/<int:article_id>', methods=['GET'])
 async def get_article(article_id):
-    article = await query_db('SELECT A.Titre, A.Date_Creation, A.Nombre_Likes, A.Nombre_Vues, B.Nom, B.Email FROM Article A INNER JOIN Utilisateur B ON A.ID_Utilisateur_Createur = B.ID WHERE A.[ID] = ?', [article_id])
-    if not article:
-        await log("Article non trouvé", "error")
-        return "Article non trouvé", 404
+    try :
+        user_id = request.args.get('user_id')  # Supposons que l'ID de l'utilisateur est passé en paramètre
+        
+        print("user_id => ", user_id)
+        article = await query_db('SELECT A.Titre, A.Date_Creation, A.Nombre_Likes, A.Nombre_Vues, B.Nom, B.Email FROM Article A INNER JOIN Utilisateur B ON A.ID_Utilisateur_Createur = B.ID WHERE A.[ID] = ?', [article_id])
+        if not article:
+            await log("Article non trouvé", "error")
+            return "Article non trouvé", 404
 
-    article_titre = article[0]['Titre']
-    path_file_html = os.path.join(os.getcwd(), "..", "Frontend", "public", "article", article_titre, f"{article_titre}.html")
-    if not os.path.exists(path_file_html):
-        await log("Fichier HTML non trouvé", "error")
-        return "Fichier HTML non trouvé", 404
-    
-    await increment_article_views(article_id)
+        article_titre = article[0]['Titre']
+        path_file_html = os.path.join(os.getcwd(), "..", "Frontend", "public", "article", article_titre, f"{article_titre}.html")
+        if not os.path.exists(path_file_html):
+            await log("Fichier HTML non trouvé", "error")
+            return "Fichier HTML non trouvé", 404
+        
+        await add_view(user_id, article_id)
 
-    return send_file(path_file_html)
+        return send_file(path_file_html)
+    except Exception as e:
+        print("error => ", e)
+        return jsonify({"error": str(e)}), 500
 
 # Route pour uploader un fichier
 @article_bp.route('/upload', methods=['POST'])
@@ -98,10 +105,10 @@ async def create_article2():
 
 
 # Fonction pour incrémenter le compteur de vues
-async def increment_article_views(article_id):
-    query = 'UPDATE [Article] SET Nombre_Vues = ISNULL(Nombre_Vues, 0) + 1 WHERE ID = ?'
-    await query_db(query, [article_id])
-    
-async def get_view_by_article(id_article):
-    view = await query_db('SELECT Nombre_Vues FROM Article WHERE [ID] = ?', [id_article])
-    return view[0]['Nombre_Vues']
+async def add_view(user_id, article_id):
+    query = 'EXEC [dbo].[InsertView] @UserID =?, @ArticleID =?'
+    print("ok")
+    await query_db(query, [user_id, article_id])
+    print("ok2")
+
+

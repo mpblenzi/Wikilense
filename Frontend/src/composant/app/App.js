@@ -11,13 +11,17 @@ import ArticleDetails from '../../pages/articleDetails/ArticleDetails';
 import Acceuil from '../../pages/acceuil/acceuil';
 import NewArticle from '../../pages/newarticle/New_Article';
 import Footer from '../footer/footer';
+import SearchResults from '../../pages/SearchResults/SearchResults';
 
 function App({ msalInstance }) {
+  const account = msalInstance.getActiveAccount();
+  const user_id = account.localAccountId;
+
   return (
     <MsalProvider instance={msalInstance}>
       <div className="app">
         <div className="content">
-          <Pages />
+        <Pages user_id={user_id} />
         </div>
         <Footer />
       </div>
@@ -25,7 +29,7 @@ function App({ msalInstance }) {
   );
 }
 
-const Pages = () => {
+const Pages = (user_id) => {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
@@ -34,8 +38,9 @@ const Pages = () => {
       <Route path="/how_to_use_Wikilense" element={<HowToUseWikilense />} />
       <Route path="/key_numbers" element={<KeyNumbers />} />
       <Route path="/new_articles" element={<NewArticles />} />
-      <Route path="/articles/:articleId" element={<ArticleDetails />} />
+      <Route path="/articles/:articleId" element={<ArticleDetails user_id={user_id} />} />
       <Route path="/NewArticle" element={<NewArticle />} />
+      <Route path="/results" element={<SearchResults />} />
     </Routes>
   );
 };

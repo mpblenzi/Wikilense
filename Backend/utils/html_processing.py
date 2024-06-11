@@ -55,12 +55,19 @@ async def insert_Keywords_by_article(New_Keywords):
     await query_db('INSERT INTO ArticleMotsCles ([ID_Article],[ID_MotCle]) VALUES (?,?)', (id_article,Id_New_Keywords))
     
     await log("Les mots clés ont été ajoutés avec succès", "success")
+    
+# Fonction pour insérer la relation dans la table ArticleMotsCles
+async def insert_Keywords_by_article_adjuste(Id_New_Keywords, id_article):
+
+    await query_db('INSERT INTO ArticleMotsCles ([ID_Article],[ID_MotCle]) VALUES (?,?)', (id_article,Id_New_Keywords))
+
+    await log("Les mots clés ont été ajoutés avec succès", "success")
+
 
 #recherche et remplacement le mot clef dans les articles
 async def recherche_mot_clef_By_article(mot_clef):
     
     path_article = os.path.join(os.getcwd(), "..", "Frontend", "public", "article")
-    
     redirection = await recherche_lien_fonction_Key_word(mot_clef)    
     
     for root, dirs, files in os.walk(path_article):
@@ -68,17 +75,26 @@ async def recherche_mot_clef_By_article(mot_clef):
             for file in os.listdir(os.path.join(root, name)):
                 if file.endswith(".html"):
                     with open(os.path.join(root, name, file), 'r', encoding='utf-8') as html_file:
+                        #retirer l'extension .html
+                        article_name = name.replace(".html", "")
+                        
+                        id_keyword = await get_id_by_keyword(mot_clef)
+                        await log(f"ID keyword => {id_keyword}", "success")
+                        
+                        print("article_name => ", article_name)
+                        id_article = await get_id_by_title(article_name)
+                        
+                        await log(f"ID article => {id_article} ID keyword => {id_keyword}", "success")
                         
                         html_content = html_file.read()
-                        html_modifier = await recherche_motClef_in_HTML(html_content, mot_clef, redirection)
+                        html_modifier = await recherche_motClef_in_HTML(html_content, mot_clef, redirection, id_article, id_keyword)
                         with open(os.path.join(root, name, file), 'w', encoding='utf-8') as file:
                             file.write(html_modifier)
                             file.close()
-                            
-                        
-                    
+
+
 #fonction pour rechercher le mot clé dans le contenu HTML
-async def recherche_motClef_in_HTML(html_content, mot_a_chercher, lien_redirection):
+async def recherche_motClef_in_HTML(html_content, mot_a_chercher, lien_redirection, id_article, id_motcle):
     soup = BeautifulSoup(html_content, 'html.parser')
     regex_mot = re.compile(re.escape(mot_a_chercher), re.IGNORECASE)
     balises_texte = soup.find_all(string=regex_mot)
@@ -100,6 +116,7 @@ async def recherche_motClef_in_HTML(html_content, mot_a_chercher, lien_redirecti
             balise.replace_with(span_avant)
             span_avant.insert_after(nouvelle_balise)
             nouvelle_balise.insert_after(span_apres)
+            await insert_Keywords_by_article_adjuste(id_motcle, id_article)
             await log(f"Le mot clé {mot_a_chercher} a été remplacé par un lien", "success")
     return str(soup)
 
@@ -146,8 +163,10 @@ async def find_Key_Word_in_html(titre):
                     print(f"file => {titre}.html")
                     print("mot_clef => ", key['MotCle'])
                     print("redirection => ", lien_redirection)
+                    
+                    id_article = await get_id_by_title (titre)
 
-                    html_modifier = await recherche_motClef_in_HTML(html_content, key['MotCle'], lien_redirection)
+                    html_modifier = await recherche_motClef_in_HTML(html_content, key['MotCle'], lien_redirection, id_article, key['ID'])
                     
                     with open(path_article, 'w', encoding='utf-8') as file:
                         file.write(html_modifier)
@@ -160,3 +179,10 @@ async def find_Key_Word_in_html(titre):
                 print(f"Error processing key {key}: {key_error}")
     except Exception as e:
         print("error => ", e)
+        
+#fonction pour trouver l'id de l'article par son titre
+async def get_id_by_title(title):
+    print("title => ", title)
+    id_article = await query_db('SELECT ID FROM Article WHERE [Titre] = ?', [title])
+    print("id_article => ", id_article)
+    return id_article[0]['ID']

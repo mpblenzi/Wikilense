@@ -1,7 +1,6 @@
 from flask import Blueprint, jsonify, request
 from utils.db import query_db, log
 import datetime
-import asyncio
 
 commentaire_bp = Blueprint('commentaire', __name__)
 
@@ -116,7 +115,7 @@ async def post_comment_reply():
         await log("il manque des données pour l'ajout du commentaire", "error")
         return jsonify({"error": "Données manquantes pour l'ajout du commentaire"}), 400
     
-    # Insérer le commentaire dans la base de données
+    # Insérer le commentaire reponses dans la base de données
     try:
         await log(f"Ajout du commentaire pour l'article {id_article}", "info")
         await query_db('INSERT INTO Commentaire (ID_Article, ID_Utilisateur, Contenu, Date_Publication, Active, Modifier, ID_Commentaire) VALUES (?, ?, ?, ?, 1, 0, ?)',
