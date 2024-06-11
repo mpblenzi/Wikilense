@@ -1,0 +1,69 @@
+.comments-section {
+    padding: 5px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    
+}
+
+.comment {
+    background: white;
+    width: 500px;
+    margin: 5px;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.comment-user {
+    /* mettre le text en noir */
+    color: black;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.comment p {
+    font-size: 14px;
+    color: #333;
+    margin-bottom: 0px;
+}
+
+.comment textarea{
+    font-size: 14px;
+    color: #333;
+    margin-bottom: 0px;
+    display: flex;
+}
+
+.comment span {
+    font-size: 12px;
+    color: #666;
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+        height: auto;
+    }
+    to {
+        opacity: 0;
+        height: 0;
+        padding: 0;
+        margin: 0;
+    }
+}
+
+.comment-deleting {
+    animation: fadeOut 3s;
+    opacity: 0;
+    height: 0;
+    padding: 0;
+    margin: 0;
+}
+
+.comment-actions, .Button-action {
+    display: flex;
+    gap: 0 px; /* Ajustez l'espacement entre les boutons selon vos besoins */
+    align-items: center; /* Centre les boutons verticalement */
+    justify-content: flex-start; /* Ajustez cela si vous voulez que les boutons soient alignés différemment */
+}
+

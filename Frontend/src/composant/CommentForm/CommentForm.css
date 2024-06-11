@@ -1,0 +1,33 @@
+.comment-form {
+    display: flex; /* Utilise flexbox pour aligner les éléments en ligne */
+    align-items: center; /* Centre les éléments verticalement */
+    max-width: 500px; /* ajuste la largeur selon tes besoins */
+    margin: 5px;
+    padding: 20px;
+    background: #f9f9f9;
+    border: 1px solid #e1e1e1;
+    border-radius: 5px;
+}
+
+.comment-form input[type="text"] {
+    flex: 1; /* Permet au champ de texte de remplir l'espace disponible */
+    padding: 10px;
+    margin-right: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px; /* Taille de la police ajustable */
+}
+
+.comment-form button[type="submit"] {
+    padding: 10px;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px; /* Taille de la police ajustable */
+}
+
+.comment-form button[type="submit"]:hover {
+    background-color: #0056b3;
+}

@@ -1,29 +1,166 @@
-/* CategoryCard.css */
-.card {
-cursor: pointer;
-width: 100%;
-height: 100%;
-}
-
-/* CategoryModal.css */
+/* categoryModal.css */
 .modal-overlay {
-position: fixed;
-top: 0;
-left: 0;
-right: 0;
-bottom: 0;
-display: flex;
-background-color: rgba(0, 0, 0, 0.7); /* Effet transparent */
-z-index: 1000;/* Assurez-vous que c'est au-dessus de tout autre contenu */
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* background-color: rgba(0, 0, 0, 0.8); Effet transparent */
+  z-index: 1000;
+  opacity: 1;
+  transition: opacity 0.3s ease-out;
 }
 
 .modal-content {
-background: rgba(0, 0, 0, 0.7);
-padding: 20px;
-border-radius: 8px;
-max-width: 100%;
-width: 100%;
-max-height: 100%;
-z-index: 1001; /* Plus haut que l'overlay pour ne pas être affecté par le fond transparent */
-color: white;
+  background: rgba(0, 0, 0, 0.8);
+  padding: 40px;
+  border-radius: 8px;
+  width: 100%; /* Prenez 90% de la largeur de la fenêtre */
+  height: 100%; /* Prenez 90% de la hauteur de la fenêtre */
+  color: white;
+  transition: transform 0.3s ease-out;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-title {
+  font-size: 65px;
+  margin-right: auto; /* Ajoute de l'espace entre le titre et le bouton subscribe */
+}
+
+.modal-close {
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 24px; /* Augmenté pour plus de visibilité */
+  cursor: pointer;
+}
+
+.modal-body {
+  flex: 1;
+  overflow-y: auto;
+  margin-top: 20px;
+}
+
+.sous-category {
+  margin-bottom: 20px;
+}
+
+.sous-category-name {
+  font-size: 45px; /* Augmenté pour plus de visibilité */
+  font-weight: bold;
+}
+
+.articles {
+  margin-left: 20px;
+}
+
+.article a {
+  margin: 5px 0;
+  color: #cfcfcf;
+  text-decoration: none;
+  font-size: 35px;
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.subscribe-button {
+  padding: 10px 20px;
+  border: 2px solid #fff;
+  border-radius: 5px;
+  background-color: transparent;
+  color: #fff;
+  font-size: 18px;
+  cursor: pointer;
+  transition: 0.2s linear;
+  margin-left: 20px; /* Ajoute de l'espace à gauche du bouton subscribe */
+}
+
+.subscribe-button:hover {
+  transform: scale(1.1);
+}
+
+.prev-button {
+  padding: 10px 20px;
+  border: 2px solid #fff;
+  border-radius: 5px;
+  background-color: transparent;
+  color: #fff;
+  font-size: 18px; /* Augmenté pour plus de visibilité */
+  cursor: pointer;
+  transition: 0.2s linear;
+  margin-bottom: 25px;
+}
+
+.prev-button:hover {
+  transform: scale(1.1);
+}
+
+/* Loading spinner styles */
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1002;
+}
+
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.loading-circle {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 4px solid transparent;
+  border-top-color: #fff;
+  animation: spin 1s linear infinite;
+}
+
+.loading-text {
+  font-size: 18px;
+  color: #fff;
+  margin-top: 10px;
+  animation: fadeInOut 2s infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes fadeInOut {
+  0%, 100% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
 }

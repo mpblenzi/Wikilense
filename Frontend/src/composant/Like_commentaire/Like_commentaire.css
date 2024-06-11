@@ -1,0 +1,65 @@
+/*------ Settings ------*/
+.container-like {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+    user-select: none;
+  }
+  
+  .container-like .thumbs-up-regular {
+    position: flex;
+    animation: keyframes-fill .5s;
+  }
+  
+  .container-like .thumbs-up-solid {
+    position: flex;
+    display: none;
+    animation: keyframes-fill .5s;
+  }
+  
+  /* ------ On check event ------ */
+  .container-like input:checked ~ .thumbs-up-regular {
+    display: none;
+  }
+  
+  .container-like input:checked ~ .thumbs-up-solid {
+    display: block;
+  }
+  
+  /* ------ Hide the default checkbox ------ */
+  .container-like input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+  }
+  .container-like label {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    size: 10px;
+    font-size: small;
+  }
+.counter_like{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    color: var(--);
+    margin-left: 5px;
+}
+  
+  /* ------ Animation ------ */
+  @keyframes keyframes-fill {
+    0% {
+      transform: scale(0);
+      opacity: 0;
+    }
+  
+    50% {
+      transform: scale(1.2) rotate(-10deg);
+    }
+  }

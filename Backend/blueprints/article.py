@@ -1,71 +1,114 @@
-from flask import Blueprint, jsonify
-from db import query_db
-from flask import request
+from flask import Blueprint, jsonify, request, send_file
 from werkzeug.utils import secure_filename
 import os
+import datetime
+import aspose.words as aw
+from utils.db import query_db, log  # Importation des fonctions utilitaires pour la base de données et les logs
+from utils.html_processing import rewrite_html,ajuster_chemins_images, replace_word, insert_Keywords, insert_Keywords_by_article, recherche_mot_clef_By_article, find_Key_Word_in_html  # Importation des fonctions de traitement HTML
+from utils.validation import validate_file  # Importation de la fonction de validation de fichier
 
+# Création d'un blueprint pour les routes de gestion des articles
 article_bp = Blueprint('article', __name__)
 
+# Route pour obtenir les articles par catégorie
 @article_bp.route('/by_categorie/<int:id_category>', methods=['GET'])
-def get_article_by_category(id_category):
-    articles = query_db('SELECT * FROM Article WHERE [ID_Sous_Sous_Categorie] = ?', [id_category])
+async def get_article_by_category(id_category):
+    articles = await query_db('SELECT * FROM Article WHERE [ID_Sous_Sous_Categorie] = ?', [id_category])
+    await log(f"Récupération des articles de la catégorie avec l'id {id_category}", "info")
     return jsonify(articles)
 
+# Route pour obtenir un article par son ID
 @article_bp.route('/by_id/<int:id_article>', methods=['GET'])
-def get_article_by_id(id_article):
-    article = query_db('SELECT A.Titre, A.Date_Creation, A.Nombre_Likes, A.Nombre_Vues, B.Nom, B.Email FROM Article A inner join Utilisateur B on A.ID_Utilisateur_Createur = B.ID WHERE A.[ID] = ?', [id_article])
+async def get_article_by_id(id_article):
+    article = await query_db('SELECT A.Titre, A.Date_Creation, A.Nombre_Likes, A.Nombre_Vues, B.Nom, B.Email FROM Article A INNER JOIN Utilisateur B ON A.ID_Utilisateur_Createur = B.ID WHERE A.[ID] = ?', [id_article])
+    await log(f"Récupération de l'article avec l'id {id_article}", "info")
     return jsonify(article)
 
-@article_bp.route('/article/<int:article_id>')
-def get_article(article_id):
-    # Récupérez les informations de base de l'article
-    article = query_db('SELECT A.Titre, A.Date_Creation, A.Nombre_Likes, A.Nombre_Vues, B.Nom, B.Email FROM Article A inner join Utilisateur B on A.ID_Utilisateur_Createur = B.ID WHERE A.[ID] = ?',(article_id,), one=True)
-    
-    # Supposons que vous ayez deux requêtes supplémentaires pour récupérer parties et images
-    parties = query_db('SELECT * FROM Partie WHERE ID_Article = ? ORDER BY Position', (article_id,))
+# Route pour obtenir le fichier HTML d'un article
+@article_bp.route('/<int:article_id>', methods=['GET'])
+async def get_article(article_id):
+    try :
+        user_id = request.args.get('user_id')  # Supposons que l'ID de l'utilisateur est passé en paramètre
+        
+        print("user_id => ", user_id)
+        article = await query_db('SELECT A.Titre, A.Date_Creation, A.Nombre_Likes, A.Nombre_Vues, B.Nom, B.Email FROM Article A INNER JOIN Utilisateur B ON A.ID_Utilisateur_Createur = B.ID WHERE A.[ID] = ?', [article_id])
+        if not article:
+            await log("Article non trouvé", "error")
+            return "Article non trouvé", 404
 
-    images = query_db('SELECT * FROM Image WHERE ID_Partie = ? ORDER BY Position', (article_id,))
+        article_titre = article[0]['Titre']
+        path_file_html = os.path.join(os.getcwd(), "..", "Frontend", "public", "article", article_titre, f"{article_titre}.html")
+        if not os.path.exists(path_file_html):
+            await log("Fichier HTML non trouvé", "error")
+            return "Fichier HTML non trouvé", 404
+        
+        await add_view(user_id, article_id)
 
-    # Transformez les résultats en format JSONs
-    article_data = {
-        'Titre': article['Titre'],
-        'Date_Creation': str(article['Date_Creation']),
-        'Mail': article['Email'],
-        'Nom': article['Nom'],
-        'Nombre_Vues' : article['Nombre_Vues'],
-        'Nombre_Likes' : article['Nombre_Likes'],
-        'Contenus': []
-    }
+        return send_file(path_file_html)
+    except Exception as e:
+        print("error => ", e)
+        return jsonify({"error": str(e)}), 500
 
-    for partie in parties:
-        article_data['Contenus'].append({
-            'type': 'texte', 
-            'contenu': partie['Contenu'],
-            'position': partie['Position'] 
-        })
-
-    for image in images:
-        article_data['Contenus'].append({
-            'type': 'image', 
-            'src': image['URL'],
-            'position': image['Position'] 
-        })
-
-    # Triez les contenus par position
-    article_data['Contenus'].sort(key=lambda x: x['position'])
-
-    return jsonify(article_data)
-
-
+# Route pour uploader un fichier
 @article_bp.route('/upload', methods=['POST'])
-def file_upload():
-    #avoir le chemin du fichier actuel
+async def file_upload():
     path = os.getcwd()
-    file = request.files['file']  # 'file' est le nom de la clé correspondant au fichier
-    title = request.form.get('title')  # Récupérer d'autres données si nécessaire
-    if file:
+    file = request.files['file']
+    if file and validate_file(file.filename):  # Validation du fichier
         filename = secure_filename(file.filename)
-        file.save(os.path.join(path+'\\asset\\documents\\', filename))  # Remplacez par le chemin où vous voulez enregistrer le fichier
-        return jsonify({"success": "File uploaded successfully", "filename": filename}), 200
+        file.save(os.path.join(path, 'asset', 'documents', filename))  # Sauvegarde du fichier
+        await log(f"Le fichier {filename} a été téléchargé avec succès dans asset/documents", "success")
+        return jsonify({"success": "File uploaded successfully", "filename": filename, "Status": 200}), 200
     else:
-        return jsonify({"error": "No file part"}), 400
+        await log("Le fichier n'est pas un document Word", "error")
+        return jsonify({"error": "File type not allowed"}), 400
+
+# Route pour créer un article à partir d'un fichier Word
+@article_bp.route('/create_article2', methods=['POST'])
+async def create_article2():
+    path = os.getcwd()
+    file = request.files['file']
+    filename = secure_filename(file.filename)
+    path_file_word = os.path.join(path, 'asset', 'documents', filename)
+    account_id = request.form.get('account_id')
+    category_id = request.form.get('category')
+    title = request.form.get('title')
+
+    # Conversion du fichier Word en HTML
+    doc = aw.Document(path_file_word)
+    options = aw.saving.HtmlSaveOptions()
+    options.export_font_resources = False
+    path_file_html = os.path.join(path, "..", "Frontend", "public", "article", title, f"{title}.html")
+    doc.save(path_file_html, options)
+    await log(f"Le fichier {filename} a été converti en HTML dans le Frontend avec succès", "success")
+    
+    # Traitement HTML
+    await rewrite_html(path_file_html)
+    await ajuster_chemins_images(path_file_html, title)
+    await replace_word(path_file_word)
+    await log(f"L'article {title} a été modifié avec succès", "success")
+
+    # Insertion de l'article dans la base de données
+    date_creation = datetime.datetime.now()
+    await query_db('INSERT INTO [Wikilense].[dbo].[Article] values (?,?,?,?,0,0,1)', [title, category_id, account_id, date_creation])
+    await log(f"L'article {title} a été créé avec succès", "success")
+    
+    
+    await insert_Keywords(title.lower())
+    await insert_Keywords_by_article(title.lower())
+    
+    await recherche_mot_clef_By_article(title.lower())
+
+    await find_Key_Word_in_html(title.lower())  # Décommenter cette ligne si nécessaire EN COURS DE DEVELOPPEMENT
+    
+    return jsonify({"success": "File uploaded successfully", "filename": filename, "Status": 200}), 200
+
+
+# Fonction pour incrémenter le compteur de vues
+async def add_view(user_id, article_id):
+    query = 'EXEC [dbo].[InsertView] @UserID =?, @ArticleID =?'
+    print("ok")
+    await query_db(query, [user_id, article_id])
+    print("ok2")
+
+

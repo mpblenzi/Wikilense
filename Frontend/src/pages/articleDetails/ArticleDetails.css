@@ -1,0 +1,13 @@
+.article-details{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    background-color: white;
+    color: black;
+}
+
+.article-button_admin{
+    width: 100px;
+    background-color: red;
+}

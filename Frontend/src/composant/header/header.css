@@ -1,10 +1,63 @@
-.class-header{
+/* header.css */
+.class-header {
     background-color: #000000;
     color: #ffffff;
-    position: flex;
     display: flex;
-    top: 0;
     justify-content: space-between;
     align-items: center;
-    box-sizing: border-box;
+    padding: 0 20px;
+    height: 132px;
+}
+
+.logo {
+    width: 120px; /* Ajuster selon la taille souhaitée */
+    height: 120px; /* Ajuster selon la taille souhaitée */
+    object-fit: contain; /* Empêche la déformation de l'image */
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.center-content {
+    display: flex;
+    align-items: center;
+    gap: 50px;
+    flex-grow: 1;
+    justify-content: center;
+}
+
+.links {
+    display: flex;
+    gap: 100px;
+}
+
+.links a {
+    font-size: 24px;
+    color: #ffffff;
+    text-decoration: none;
+    transition: transform 0.3s ease-in-out; /* Animation sur le survol */
+}
+
+.links a:hover {
+    color: red;
+}
+
+.reserche-notification {
+    display: flex;
+    align-items: center;
+    gap: 50px;
+}
+
+.right-content {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.logo-Right {
+    width: 150px; /* Ajuster selon la taille souhaitée */
+    object-fit: contain; /* Empêche la déformation de l'image */
 }

@@ -2,59 +2,48 @@ import React from 'react';
 import './header.css';
 
 import {Link } from 'react-router-dom';
-import { useState,useEffect } from 'react';
-import { useMsalAuthentication } from '@azure/msal-react';
-import { InteractionType } from '@azure/msal-browser';
-import { fetchData } from '../../Fetch';
 import SearchBar from '../searchBar/searchBar';
 import NotificationIcon from '../notification_icon/notification_icon';
 
 const Header = () => {
-    const [data, setData] = useState(null);
-    const {result, error} = useMsalAuthentication(InteractionType.Popup, {
-        scopes: ["user.Read"],
-    });
-
-    useEffect(() => {
-        if(!!data){
-            console.log("ici",data);
-            return;
-        }
-
-        if(!!error){
-            console.log("ici",error);
-            return;
-        }
-
-        if(result){
-            console.log("ici",result);
-            const {accessToken} = result;
-            fetchData("https://graph.microsoft.com/v1.0/me", accessToken)
-                .then(response => setData(response))
-                .catch(error => console.log(error));
-            
-        }
-    }, [data, error, result]);
 
     return (
-        <div className='class-header'>
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/Wikipedia-logo-v2.svg/langfr-220px-Wikipedia-logo-v2.svg.png" alt="logo" className="logo"/>
-            <nav>
-                <div>
-                    <Link to="/how_to_use_Wikilense">How to use WikiLens</Link>
-                </div>
-                <div>   
-                    <Link to="/key_numbers">Key numbers</Link>
-                </div>
-                <div>   
-                <Link to="/new_articles">New articles</Link>
-                </div>          
-            </nav>
-            <SearchBar/>
-            <NotificationIcon/>
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/Wikipedia-logo-v2.svg/langfr-220px-Wikipedia-logo-v2.svg.png" alt="logo" className="logo"/>
-        </div>
-    );
-};
+      <div className="class-header">
+        {/*logo sur la gauche avev image dans le dossier assets*/}
+        
+        <Link to="/">
+          <img src="/assets/New wikilens logo (1).png" alt="logo gauche" className="logo"/>
+        </Link>
 
-export default Header;
+        {/* Liens et barre de recherche au centre */}
+        <div className="center-content">
+          
+          {/* Liens */}
+          <div className="links">
+          <Link to="/how_to_use_Wikilense">FAQ</Link> 
+          <Link to="/key_numbers">Key figures</Link> 
+          <Link to="/new_articles">New articles</Link> 
+          </div>
+
+          <div className='reserche-notification'>
+            {/* Barre de recherche */}
+            <SearchBar/>
+
+            {/* Icône de notification */}
+            <NotificationIcon/>
+          </div>
+        </div>
+
+        <div className="right-content">
+          {/* logo sur la droite */}
+          <img src="/assets/LOFT TKS white logo HD (1).png" alt="logo droite" className="logo-Right" />
+          {/*Rajouter le logo essilor luxo */}
+          <img src="/assets/EssilorLuxottica white logo.png" alt="logo droite" className="logo-Right" />
+        </div>
+        
+
+      </div>
+    );
+  }
+    
+  export default Header;

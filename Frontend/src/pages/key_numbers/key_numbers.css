@@ -1,0 +1,47 @@
+/* styles.css */
+.content {
+    color: black;
+  }
+
+  .h1{
+    height: max-content;
+    align-content: center;
+  }
+  .statistics {
+    display: flex;
+    justify-content: space-around;
+    margin: 20px 0;
+  }
+  
+  .statistics div {
+    border: 1px solid #444;
+    padding: 20px;
+    border-radius: 10px;
+    width: 30%;
+  }
+  
+  .statistics h2 {
+    font-size: 48px;
+    margin: 0;
+  }
+  
+  .top-lists {
+    display: flex;
+    justify-content: space-around;
+  }
+  
+  .top-list {
+    width: 45%;
+    text-align: left;
+  }
+  
+  .top-list h3 {
+    text-align: center;
+  }
+  
+  .footer {
+    text-align: center;
+    font-size: 12px;
+    padding: 20px 0;
+  }
+  

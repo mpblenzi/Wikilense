@@ -1,11 +1,9 @@
 import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
+import { createRoot } from 'react-dom/client';
 import App from './composant/app/App';
 import reportWebVitals from './reportWebVitals';
 import { PublicClientApplication, EventType } from '@azure/msal-browser';
 import { BrowserRouter } from "react-router-dom";
-
 
 const pca = new PublicClientApplication({
   auth:{
@@ -15,7 +13,7 @@ const pca = new PublicClientApplication({
   },
   cache:{
       cacheLocation:'localStorage',
-      storeAuthStateInCookie: false,
+      storeAuthStateInCookie: true,
   },
   system:{
     loggerOptions:{
@@ -25,22 +23,41 @@ const pca = new PublicClientApplication({
   }
 });
 
+async function initializeMsal() {
+  try {
+    await pca.initialize();
+    // Après l'initialisation, rechercher l'iframe généré par MSAL
+    const msalIframe = document.querySelector("iframe[src^='https://login.microsoftonline.com']");
+    if (msalIframe) {
+      // Modifier les attributs sandbox de l'iframe pour désactiver allow-scripts et allow-same-origin
+      msalIframe.setAttribute('sandbox', 'allow-forms allow-popups allow-same-origin allow-top-navigation');
+    }
+  } catch (error) {
+    console.error('Error initializing MSAL:', error);
+  }
+}
+
+initializeMsal();
+
+// Ajouter le gestionnaire d'événements pour login success
 pca.addEventCallback((event) => {
-  if (event.eventType === EventType.LOGIN_SUCCESS) {
+  if (event.eventType === EventType.logIN_SUCCESS) {
     pca.setActiveAccount(event.payload.account);
   }
 });
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <React.StrictMode>
-    <BrowserRouter>
-      <App msalInstance={pca} />
-    </BrowserRouter>
-  </React.StrictMode>
-);
+initializeMsal().then(() => {
+  try {
+    createRoot(document.getElementById('root')).render(
+      <React.StrictMode>
+        <BrowserRouter>
+          <App msalInstance={pca} />
+        </BrowserRouter>
+      </React.StrictMode>
+    );
+  } catch (error) {
+    console.error('Error rendering React application:', error);
+  }
+});
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
